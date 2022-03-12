@@ -34,23 +34,40 @@ class CategoriesController extends Controller
 
         if($validator->fails())
         {
-            // dd('field');
             return response()->json([
                 'status'=>400,
                 'errors'=>$validator->messages()
             ]);
 
         }else{
-            // dd('success');
-            // $student = new Student;
-            // $student->name = $request->input('name');
-            // $student->course = $request->input('course');
-            // $student->email = $request->input('email');
-            // $student->phone = $request->input('phone');
-            // $student->save();
+
+           
+            
+            // if($validation->passes())
+            // {
+            //  $image = $request->file('select_file');
+            //  $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            //  $image->move(public_path('images'), $new_name);
+            //  return response()->json([
+            //   'message'   => 'Image Upload Successfully',
+            //   'uploaded_image' => '<img src="/images/'.$new_name.'" class="img-thumbnail" width="300" />',
+            //   'class_name'  => 'alert-success'
+            //  ]);
+            // }
+
+
+        $image = $request->file('image');
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(300,300)->Save('upload/backend/Categories/'.$name_gen);
+        $save_url = $name_gen;
+
+            $student = new Categories;
+            $student->name = $request->input('name');
+            $student->image = $save_url;
+            $student->save();
             return response()->json([
                 'status'=>200,
-                'message'=>'Student Added Successfully.'
+                'message'=>'$student->name',
             ]);
         }
 

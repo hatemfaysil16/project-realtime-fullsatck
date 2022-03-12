@@ -1,5 +1,7 @@
 @extends('layouts.backend.mastar')
 
+
+
 @section('title')
     blank
 @endsection
@@ -15,14 +17,17 @@
             <div class="card card-statistics h-100">
                 <div class="card-body">
 
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col mb-3">
                             <button type="button" class="btn  btn-outline-primary" data-bs-toggle="modal"
                             data-bs-target="#AddStudentModal">اضافه الفئة </button>
                         </div>
-                    </div>
+                    </div> --}}
                     @include('backend.massage')
+                    <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale"
+                    data-toggle="modal" href="#modaldemo8">اضافة قسم</a>
 
+                    
                     <div class="table-responsive">
                         <table id="datatable" class="table table-striped table-bordered p-0 text-center table-hover">
                             <thead>
@@ -75,6 +80,9 @@
 
     {{-- start Add create --}}
     @include('backend.pages.Categories.create')
+
+ 
+
     {{-- end Add create --}}
 
 

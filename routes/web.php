@@ -62,7 +62,7 @@ Route::group(
         //users
         Route::resource('users', UserController::class);
 
-        // Route::post('store', [CategoriesController::class,'store'])->name('store');
+        Route::post('asdasdsad', [MailController::class,'store'])->name('sadsd');
 
         Route::resource('Instructors', InstructorsController::class)->except(['show']);
         Route::resource('Categories', CategoriesController::class)->except(['show']);
