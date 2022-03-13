@@ -20,7 +20,7 @@
 
                     @include('backend.massage')
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        Launch demo modal
+                        اضافة الفئة
                       </button>
 
 
@@ -49,7 +49,7 @@
 
 
     {{-- start Add create --}}
-    @include('backend.pages.Categories.create')
+    @include('backend.pages.Categories.crud')
 
 
 

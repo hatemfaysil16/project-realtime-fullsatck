@@ -1,46 +1,4 @@
-
-{{-- Edit Modal --}}
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form  id="UpdateEmployForm" method="post" enctype="multipart/form-data">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit & Update Student Data</h5>
-
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-
-                </div>
-
-                <div class="modal-body">
-
-                    <ul id="update_msgList"></ul>
-
-                    <input type="text" id="stud_id" />
-
-                    <div class="form-group mb-3">
-                        <label for="">Full Name</label>
-                        <input type="text" id="name" name="name" value="" required class="form-control">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="">image</label>
-
-                        <input type="file" id="image" required class="form-control">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary update_student">Update</button>
-                </div>
-
-            </div>
-        </form>
-    </div>
-</div>
-{{-- Edn- Edit Modal --}}
-
-{{-- add --}}
+{{--start add Modal--}}
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
     <form  id="AddEmployeeForm" method="post" enctype="multipart/form-data">
@@ -71,11 +29,51 @@
     </form>
     </div>
 </div>
-{{-- add --}}
+{{--end add Modal--}}
 
+{{-- start Edit Modal --}}
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form  id="UpdateEmployForm" method="post" enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit & Update Student Data</h5>
 
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
 
-{{-- delete --}}
+                </div>
+
+                <div class="modal-body">
+
+                    <ul id="update_msgList"></ul>
+
+                    <input type="text" id="stud_id" name="id"/>
+
+                    <div class="form-group mb-3">
+                        <label for="">Full Name</label>
+                        <input type="text" id="name_s" name="name" required class="form-control"/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="">image</label>
+                        <input type="hidden" id="old_image" name="old_image">
+                        <img src="" id="image_s" name="image" alt=""/>
+                        <input type="file" id="" name="image" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary update_student">Update</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+{{-- end Edit Modal --}}
+
+{{--start delete Modal--}}
 <div class="modal fade" id="DeleteexampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
     <form  id="AddEmployeeForm" method="delete" enctype="multipart/form-data">
@@ -98,4 +96,4 @@
     </form>
     </div>
 </div>
-{{-- delete --}}
+{{--end delete Modal--}}

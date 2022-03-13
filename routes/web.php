@@ -61,11 +61,12 @@ Route::group(
         Route::resource('roles', RoleController::class);
         //users
         Route::resource('users', UserController::class);
-
+        // Categories.store
         Route::get('Categories', [CategoriesController::class, 'index'])->name('Categories.index');
-        Route::get('fetch-students', [CategoriesController::class, 'fetchstudent']);
+        Route::get('fetch-Data', [CategoriesController::class, 'fetchData']);
         Route::get('edit-student/{id}', [CategoriesController::class, 'edit']);
         Route::post('update-student/{id}', [CategoriesController::class, 'update']);
+        Route::post('Categories/store', [CategoriesController::class, 'store']);
         Route::delete('delete-student/{id}', [CategoriesController::class, 'destroy']);
 
 

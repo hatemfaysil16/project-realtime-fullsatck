@@ -1,27 +1,29 @@
-//start add data
 $(document).ready(function() {
 
 
+    // start show token
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
-    fetchstudent();
-
+    // end show token
 
 
-    function fetchstudent() {
+    fetchData();
+
+
+    //start show
+    function fetchData() {
         $.ajax({
             type: "GET",
-            url: "/admin/fetch-students",
+            url: "/admin/fetch-Data",
             dataType: "json",
             success: function(response) {
                 $('tbody').html("");
                 $.each(response.Categories, function(key, item) {
                     $('tbody').append('<tr>\
-                        <td>' + item.id + '</td>\
+                        <td>' + (key + 1) + '</td>\
                         <td>' + item.name + '</td>\
                         <td><img src="../upload/backend/Categories/' + item.image + '" alt=""></td>\
                         <td><button type="button" value="' + item.id + '" class="btn btn-primary editbtn btn-sm">Edit</button></td>\
@@ -31,71 +33,9 @@ $(document).ready(function() {
             }
         });
     }
+    //end show
 
-
-    // edit
-    $(document).on('click', '.editbtn', function(e) {
-        e.preventDefault();
-        var stud_id = $(this).val();
-        // alert(stud_id);
-        $('#editModal').modal('show');
-        $.ajax({
-            type: "GET",
-            url: "edit-student/" + stud_id,
-            success: function(response) {
-                console.log(response.Categories);
-                if (response.status == 404) {
-                    $('#success_message').addClass('alert alert-success');
-                    $('#success_message').text(response.message);
-                    $('#editModal').modal('hide');
-                } else {
-                    // console.log(response.student.name);
-                    $('#name').val(response.Categories.name);
-                    // $('#image').val(response.Categories.image);
-                    $('#stud_id').val(stud_id);
-                }
-            }
-        });
-        $('.btn-close').find('input').val('');
-    });
-
-    //update
-    $(document).on('submit', '#UpdateEmployForm', function(e) {
-        e.preventDefault();
-        var id = $('#stud_id').val();
-        let EditFormData = new FormData($('#UpdateEmployForm')[0]);
-
-        $.ajax({
-            type: "post",
-            url: "update-student/" + id,
-            data: EditFormData,
-            dataType: "json",
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                if (response.status == 400) {
-                    $('#update_msgList').html("");
-                    $('#update_msgList').addClass('alert alert-danger');
-                    $.each(response.errors, function(key, err_value) {
-                        $('#update_msgList').append('<li>' + err_value +
-                            '</li>');
-                    });
-                } else if (response.status == 404) {
-                    alert(response.message);
-                } else if (response.status == 200) {
-                    $('#update_msgList').html("");
-                    $('#update_msgList').addClass('alert alert-danger');
-                    $('#editModal').modal('hide');
-                    alert(response.message);
-                    fetchstudent();
-                }
-            }
-        });
-
-
-    });
-
-    // add
+    //start add
     $(document).on('submit', '#AddEmployeeForm', function(e) {
         e.preventDefault();
 
@@ -103,7 +43,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            route: "{{route('Categories.store')}}",
+            url: "Categories/store",
             data: fotmData,
             contentType: false,
             processData: false,
@@ -122,24 +62,86 @@ $(document).ready(function() {
                     $('#save_errorList').addClass("d-none");
                     $('#AddEmployeeForm').find('input').val('');
                     $('#exampleModal').click();
-                    fetchstudent();
+                    fetchData();
 
                 }
             }
 
         });
     });
+    //end add
 
-    //delete
+    //start edit
+    $(document).on('click', '.editbtn', function(e) {
+        e.preventDefault();
+        var stud_id = $(this).val();
+        $('#editModal').modal('show');
+        $.ajax({
+            type: "GET",
+            url: "edit-student/" + stud_id,
+            success: function(response) {
+                if (response.status == 404) {
+                    $('#success_message').addClass('alert alert-success');
+                    $('#success_message').text(response.message);
+                    $('#editModal').modal('hide');
+                } else {
+                    $('#name_s').val(response.Categories.name);
+                    $('#old_image').val(response.Categories.image);
+                    $('#image_s').attr('src', `../upload/backend/Categories/${response.Categories.image}`);
+                    $('#stud_id').val(stud_id);
+                }
+            }
+        });
+        $('.btn-close').find('input').val('');
+    });
+    //end edit
+
+    //start update
+    $(document).on('submit', '#UpdateEmployForm', function(e) {
+        e.preventDefault();
+        var id = $('#stud_id').val();
+        let EditFormData = new FormData($('#UpdateEmployForm')[0]);
+
+        $.ajax({
+            type: "post",
+            url: "update-student/" + id,
+            data: EditFormData,
+            dataType: "json",
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                if (response.status == 400) {
+                    $('#update_msgList').html("");
+                    // $('#update_msgList').addClass('alert alert-danger');
+                    $.each(response.errors, function(key, err_value) {
+                        $('#update_msgList').append('<li>' + err_value +
+                            '</li>');
+                    });
+                } else if (response.status == 404) {
+                    alert(response.message);
+                } else if (response.status == 200) {
+                    $('#update_msgList').html("");
+                    // $('#update_msgList').addClass('alert alert-danger');
+                    $('#editModal').modal('hide');
+                    fetchData();
+                }
+            }
+        });
+
+
+    });
+    //end update
+
+    //start show model delete
     $(document).on('click', '.delete_btn', function(e) {
         e.preventDefault();
         var stud_id = $(this).val();
         $('#DeleteexampleModal').modal('show');
         $('#deleteimg_emp_id').val(stud_id);
+    });
+    //end show model delete
 
-    })
-
-
+    //start delete
     $(document).on('click', '.delete_employee_btn', function(e) {
         e.preventDefault();
 
@@ -152,23 +154,16 @@ $(document).ready(function() {
             dataType: "json",
             success: function(response) {
                 if (response.status == 404) {
-                    alert(response.message);
                     $('#DeleteexampleModal').modal('hide');
                 } else if (response.status == 200) {
-                    fetchstudent();
-                    alert(response.message);
+                    fetchData();
                     $('#DeleteexampleModal').modal('hide');
-                    alert(response.message);
                 }
 
             }
         });
-
-
-    })
+    });
+    //end delete
 
 
 });
-
-
-//end add data//end add data

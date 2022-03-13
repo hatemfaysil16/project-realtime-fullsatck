@@ -17,7 +17,7 @@ class CategoriesController extends Controller
         return view('backend.pages.Categories.index');
     }
 
-    public function fetchstudent()
+    public function fetchData()
     {
         $Categories = Categories::all();
         return response()->json([
@@ -29,7 +29,6 @@ class CategoriesController extends Controller
     {
         return view('backend.pages.Categories.create');
     }
-
 
     public function store(Request $request)
     {
@@ -53,7 +52,7 @@ class CategoriesController extends Controller
             {
                 $image = $request->file('image');
                 $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-                Image::make($image)->resize(300,300)->Save('upload/backend/Categories/'.$name_gen);
+                Image::make($image)->resize(300,300)->Save(public_path(Categories::IMAGE_PATH.$name_gen));
                 $save_url = $name_gen;
             }
 
@@ -64,7 +63,7 @@ class CategoriesController extends Controller
             $student->save();
             return response()->json([
                 'status'=>200,
-                'message'=>'student->name',
+                'message'=>'success add data',
             ]);
         }
 
@@ -86,75 +85,17 @@ class CategoriesController extends Controller
         {
             return response()->json([
                 'status'=>404,
-                'message'=>'No Categories Found.'
+                'message'=>'not found data.'
             ]);
         }
 
     }
 
-    // public function update(Request $request)
-    // {
-    //     $id = $request->id;
-    //     // start valdation
-    //     $validate = $request->validate([
-    //         'name'=>'required|not_regex:<script>',
-    //         'image'=>'mimes:pdf,jpeg,png,jpg',
-    //     ],
-    //     [
-    //         'name.required'=>'Please Input About name',
-    //         'image.required'=>'برجاء ادخال الصور',
-    //     ]);
-    //     // end valdation
-
-    //     // start old_image
-    //         $old_image = $request->old_image;
-    //     // end old_image
-
-
-    //         $brand_image = $request->file('image');
-    //         if($brand_image)
-    //         {
-    //             // start image
-    //             $image = $request->file('image');
-    //             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-    //             Image::make($image)->resize(300,300)->Save('upload/backend/Categories/'.$name_gen);
-    //             $save_url = $name_gen;
-    //             // end image
-
-    //             // start delete image
-    //             if(file_exists($save_url))
-    //             {
-    //                 unlink(Categories::IMAGE_PATH.$old_image);
-    //             }
-    //             // end delete image
-
-
-    //            // start update
-    //            Categories::find($id)->update([
-    //             'name'=> $request->name,
-    //             'image'=>$save_url,
-    //             'created_at'=>Carbon::now(),
-    //             ]);
-    //           }else{
-    //             Categories::find($id)->update([
-    //                 'name'=> $request->name,
-    //                 'image'=>$old_image,
-    //                 'created_at'=>Carbon::now(),
-    //             ]);
-    //            // end update
-    //         }
-
-    //     session()->flash('Add', 'تم  تعديل  الفئة بنجاح ');
-    //     return redirect('admin/Categories');
-    // }
-
     public function update(Request $request,$id)
     {
-        // return ($request);die;
-
         $validator = Validator::make($request->all(), [
             'name'=> 'required',
-
+            'image'=>'mimes:pdf,jpeg,png,jpg',
         ]);
 
 
@@ -168,35 +109,48 @@ class CategoriesController extends Controller
         }else{
 
 
-            $student = Categories::find($id);
-            if($student)
-            {
-                $student->name = $request->input('name');
+           // start old_image
+            $old_image = $request->old_image;
+            // end old_image
 
-                if($request->hasFile('image'))
-                {
-                    $image = $request->file('image');
-                    $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-                    Image::make($image)->resize(300,300)->Save('upload/backend/Categories/'.$name_gen);
-                    $save_url = $name_gen;
-                    $student->image = $save_url;
+
+            $brand_image = $request->hasFile('image');
+            if ($brand_image) {
+                $image = $request->file('image');
+                $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+                Image::make($image)->resize(300, 300)->Save(public_path(Categories::IMAGE_PATH.$name_gen));
+                $save_url = $name_gen;
+
+
+                if (file_exists(public_path(Categories::IMAGE_PATH.$request->old_image))) {
+                    unlink(public_path(Categories::IMAGE_PATH.$request->old_image));
                 }
 
+                Categories::find($id)->update([
+                    'name'=> $request->name,
+                    'image'=>$save_url,
+                    'created_at'=>Carbon::now(),
+                    ]);
 
-                // end delete image
-                $student->save();
                 return response()->json([
                     'status'=>200,
-                    'message'=>'student->name',
+                    'message'=>'success update data',
                 ]);
-
 
             }else{
+                Categories::find($id)->update([
+                    'name'=> $request->name,
+                    'image'=>$old_image,
+                    'created_at'=>Carbon::now(),
+                    ]);
+
                 return response()->json([
-                    'status'=>404,
-                    'message'=>'not found',
+                    'status'=>200,
+                    'message'=>'success update data',
                 ]);
             }
+
+
 
 
         }
@@ -205,49 +159,26 @@ class CategoriesController extends Controller
 
     public function destroy($id)
     {
-        $student = Categories::find($id);
-        if($student)
-        {
-            $student->delete();
-            return response()->json([
-                'status'=>200,
-                'message'=>'Student Deleted Successfully.'
-            ]);
-        }
-        else
-        {
-            return response()->json([
-                'status'=>404,
-                'message'=>'No Student Found.'
-            ]);
-        }
+            $delete = Categories::find($id);
+            if($delete)
+            {
+                $old_image = $delete->image;
+                if (file_exists(public_path(Categories::IMAGE_PATH.$old_image))) {
+                    unlink(public_path(Categories::IMAGE_PATH.$old_image));
+                }
+                $delete->delete();
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'Categories Deleted Successfully.'
+                ]);
+
+            }else{
+                return response()->json([
+                    'status'=>404,
+                    'message'=>'No Student Found.'
+                ]);
+            }
+
     }
-
-
-    // public function destroy(Request $request)
-    // {
-    //     try {
-    //         $delete = Categories::find($request->invoice_id);
-    //         $old_image = $delete->image;
-
-
-    //         if($old_image)
-    //         {
-
-    //             if(file_exists($old_image))
-    //             {
-    //                 unlink(Categories::IMAGE_PATH.$old_image);
-    //             }
-
-    //           $delete->delete();
-    //         }
-    //             session()->flash('Deleted', 'تم حذف الفئة بنجاح');
-    //         return redirect()->back();
-
-    //     } catch (\Exception $e) {
-    //         return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-    //     }
-
-    // }
 
 }
