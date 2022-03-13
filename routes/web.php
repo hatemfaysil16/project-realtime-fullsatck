@@ -62,10 +62,15 @@ Route::group(
         //users
         Route::resource('users', UserController::class);
 
-        Route::post('asdasdsad', [MailController::class,'store'])->name('sadsd');
+        Route::get('Categories', [CategoriesController::class, 'index'])->name('Categories.index');
+        Route::get('fetch-students', [CategoriesController::class, 'fetchstudent']);
+        Route::get('edit-student/{id}', [CategoriesController::class, 'edit']);
+        Route::post('update-student/{id}', [CategoriesController::class, 'update']);
+        Route::delete('delete-student/{id}', [CategoriesController::class, 'destroy']);
+
 
         Route::resource('Instructors', InstructorsController::class)->except(['show']);
-        Route::resource('Categories', CategoriesController::class)->except(['show']);
+        // Route::resource('Categories', CategoriesController::class)->except(['show']);
         Route::resource('Courses', CoursesController::class)->except(['show']);
         Route::resource('Certificates', CertificatesCountroller::class)->except(['show']);
         Route::resource('Contact', ContactController::class)->except(['create','show']);
