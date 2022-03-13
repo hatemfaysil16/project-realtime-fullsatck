@@ -61,17 +61,19 @@ Route::group(
         Route::resource('roles', RoleController::class);
         //users
         Route::resource('users', UserController::class);
-        // Categories.store
+
+
+        // Categories
         Route::get('Categories', [CategoriesController::class, 'index'])->name('Categories.index');
         Route::get('fetch-Data', [CategoriesController::class, 'fetchData']);
-        Route::get('edit-student/{id}', [CategoriesController::class, 'edit']);
-        Route::post('update-student/{id}', [CategoriesController::class, 'update']);
+        Route::get('edit-category/{id}', [CategoriesController::class, 'edit']);
         Route::post('Categories/store', [CategoriesController::class, 'store']);
+        Route::post('category-update/{id}', [CategoriesController::class, 'update']);
         Route::delete('delete-student/{id}', [CategoriesController::class, 'destroy']);
 
 
+
         Route::resource('Instructors', InstructorsController::class)->except(['show']);
-        // Route::resource('Categories', CategoriesController::class)->except(['show']);
         Route::resource('Courses', CoursesController::class)->except(['show']);
         Route::resource('Certificates', CertificatesCountroller::class)->except(['show']);
         Route::resource('Contact', ContactController::class)->except(['create','show']);

@@ -1,4 +1,17 @@
+//realtime image
 $(document).ready(function() {
+    $('#realimage').change(function(e) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#mainThmb').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files['0']);
+    });
+});
+
+
+$(document).ready(function() {
+
 
 
     // start show token
@@ -25,9 +38,10 @@ $(document).ready(function() {
                     $('tbody').append('<tr>\
                         <td>' + (key + 1) + '</td>\
                         <td>' + item.name + '</td>\
-                        <td><img src="../upload/backend/Categories/' + item.image + '" alt=""></td>\
-                        <td><button type="button" value="' + item.id + '" class="btn btn-primary editbtn btn-sm">Edit</button></td>\
-                        <td><button type="button" value="' + item.id + '" class="btn btn-danger delete_btn btn-sm">Delete</button></td>\
+                        <td><a  data-fslightbox="gallery" href="../upload/backend/Categories/' + item.image + '"><img  class="container" style="width: 10rem;" src="../upload/backend/Categories/' + item.image + '" alt=""></a></td>\
+                        <td><button type="button" value="' + item.id + '" class="btn btn-primary editbtn btn-sm">Edit</button>\
+                        <button type="button" value="' + item.id + '" class="btn btn-danger delete_btn btn-sm">Delete</button>\
+                        <a class="btn btn-primary btn-sm"  data-fslightbox="gallery" href="../upload/backend/Categories/' + item.image + '">show</a></td>\
                     \</tr>');
                 });
             }
@@ -56,12 +70,16 @@ $(document).ready(function() {
                     $.each(response.errors, function(key, err_values) {
                         $('#save_errorList').append('<li>' + err_values + '</li>')
                     });
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.success(response.message);
 
                 } else if (response.status == 200) {
                     $('#save_errorList').html("");
                     $('#save_errorList').addClass("d-none");
                     $('#AddEmployeeForm').find('input').val('');
                     $('#exampleModal').click();
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.success(response.message);
                     fetchData();
 
                 }
@@ -78,12 +96,14 @@ $(document).ready(function() {
         $('#editModal').modal('show');
         $.ajax({
             type: "GET",
-            url: "edit-student/" + stud_id,
+            url: "edit-category/" + stud_id,
             success: function(response) {
                 if (response.status == 404) {
                     $('#success_message').addClass('alert alert-success');
                     $('#success_message').text(response.message);
                     $('#editModal').modal('hide');
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.success(response.message);
                 } else {
                     $('#name_s').val(response.Categories.name);
                     $('#old_image').val(response.Categories.image);
@@ -104,7 +124,8 @@ $(document).ready(function() {
 
         $.ajax({
             type: "post",
-            url: "update-student/" + id,
+
+            url: "category-update/" + id,
             data: EditFormData,
             dataType: "json",
             contentType: false,
@@ -112,17 +133,21 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.status == 400) {
                     $('#update_msgList').html("");
-                    // $('#update_msgList').addClass('alert alert-danger');
                     $.each(response.errors, function(key, err_value) {
                         $('#update_msgList').append('<li>' + err_value +
                             '</li>');
                     });
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.success(response.message);
                 } else if (response.status == 404) {
-                    alert(response.message);
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.success(response.message);
                 } else if (response.status == 200) {
                     $('#update_msgList').html("");
-                    // $('#update_msgList').addClass('alert alert-danger');
                     $('#editModal').modal('hide');
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.success(response.message);
+
                     fetchData();
                 }
             }
@@ -155,7 +180,12 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.status == 404) {
                     $('#DeleteexampleModal').modal('hide');
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.success(response.message);
                 } else if (response.status == 200) {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error(response.message);
+
                     fetchData();
                     $('#DeleteexampleModal').modal('hide');
                 }

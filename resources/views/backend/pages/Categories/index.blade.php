@@ -3,7 +3,7 @@
 
 
 @section('title')
-    blank
+    category
 @endsection
 
 @section('css')
@@ -31,8 +31,7 @@
                                 <th>#</th>
                                 <th>الاسم</th>
                                 <th>الصورة</th>
-                                <th>edit</th>
-                                <th>delete</th>
+                                <th>العمليات</th>
                             </tr>
                             </thead>
 
@@ -59,16 +58,12 @@
 @endsection
 
 @section('js')
-
+<script src="{{ asset('backend/assets/js/fslightbox.js') }}"></script>
 <script src="{{ asset('backend/assets/js/crud/crud.js') }}"></script>
+
 <script>
 
 
-    {{-- $('#deletedinvoice').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)
-        var invoice_id = button.data('invoice_id')
-        var modal = $(this)
-        modal.find('.modal-body #invoice_id').val(invoice_id);
-    }) --}}
+
 </script>
 @endsection

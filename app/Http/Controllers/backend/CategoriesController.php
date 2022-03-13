@@ -3,14 +3,19 @@
 namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Image;
-
+use Carbon\Carbon;
 
 class CategoriesController extends Controller
 {
+
+    // <td><a  data-fslightbox="gallery" href=""><img  class="container" style="width: 10rem;" src="../upload/backend/Categories/' + item.image + '" alt=""></a></td>\
+
+
+    // <td><img class="container" style="width: 10rem;" src="../upload/backend/Categories/' + item.image + '" alt=""></td>\
+
 
     public function index()
     {
@@ -56,20 +61,20 @@ class CategoriesController extends Controller
                 $save_url = $name_gen;
             }
 
+            Categories::create([
+                'name'=>$request->name,
+                'image'=>$save_url,
+                'created_at'=>Carbon::now(),
+            ]);
 
-            $student = new Categories;
-            $student->name = $request->input('name');
-            $student->image = $save_url;
-            $student->save();
             return response()->json([
                 'status'=>200,
-                'message'=>'success add data',
+                'message'=>'success add data Categories',
             ]);
         }
 
 
     }
-
 
     public function edit($id)
     {
@@ -88,7 +93,6 @@ class CategoriesController extends Controller
                 'message'=>'not found data.'
             ]);
         }
-
     }
 
     public function update(Request $request,$id)

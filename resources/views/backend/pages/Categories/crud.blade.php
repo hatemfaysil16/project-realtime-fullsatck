@@ -18,12 +18,17 @@
 
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">image</label>
-                    <input type="file" class="form-control" id="image" name="image">
+                    <input type="file" class="form-control" id="realimage" name="image" onChange=""/>
+                    {{--  add image realtime  --}}
+                    <div class="card" style="width: 18rem;">
+                        <img src="" id="mainThmb"  >
+                    </div>
+
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">حفظ البينات </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
+                <button type="submit" class="btn btn-primary">حفظ البينات </button>
             </div>
         </div>
     </form>
@@ -37,7 +42,7 @@
         <form  id="UpdateEmployForm" method="post" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit & Update Student Data</h5>
+                    <h5 class="modal-title" id="editModalLabel">Edit & Update</h5>
 
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -49,17 +54,27 @@
 
                     <ul id="update_msgList"></ul>
 
-                    <input type="text" id="stud_id" name="id"/>
+                    <input type="hidden" id="stud_id" name="id"/>
 
                     <div class="form-group mb-3">
                         <label for="">Full Name</label>
                         <input type="text" id="name_s" name="name" required class="form-control"/>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="">image</label>
+
+
                         <input type="hidden" id="old_image" name="old_image">
-                        <img src="" id="image_s" name="image" alt=""/>
                         <input type="file" id="" name="image" class="form-control">
+
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                              <h5 class="container"> IMAGE</h5>
+                            </div>
+                            <img src="" id="image_s" name="image" class="card-img-top" alt="...">
+
+
+                        </div>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -79,18 +94,18 @@
     <form  id="AddEmployeeForm" method="delete" enctype="multipart/form-data">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h4>Are you sure ? you want to delete this data?</h4>
-                <input type="text" id="deleteimg_emp_id">
+                <h4>هل تريد حذف الفئة؟</h4>
+                <input type="hidden" id="deleteimg_emp_id">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="delete_employee_btn btn btn-primary">yes Delete</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">غلق</button>
+                <button type="button" class="delete_employee_btn btn btn-primary">حذف الفئة </button>
             </div>
         </div>
     </form>
