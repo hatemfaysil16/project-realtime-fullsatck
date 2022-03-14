@@ -41,7 +41,6 @@ Route::group(
         Route::get('/admin', function () {
             return redirect()->route('login.admin');
         });
-
         Route::get('/', function () {
             return redirect()->route('login.admin');
         });
@@ -72,20 +71,8 @@ Route::group(
         Route::delete('delete-student/{id}', [CategoriesController::class, 'destroy']);
 
 
-
-        Route::resource('Instructors', InstructorsController::class)->except(['show']);
-        Route::resource('Courses', CoursesController::class)->except(['show']);
-        Route::resource('Certificates', CertificatesCountroller::class)->except(['show']);
-        Route::resource('Contact', ContactController::class)->except(['create','show']);
-        Route::resource('Setting', SettingController::class)->except(['create','show','store']);
-        Route::resource('Serves', ServesController::class)->except(['show']);
-        Route::resource('Media_center', MediaCenterController::class)->except(['show']);
-        Route::resource('ContactwithCourses', ContactwithCoursesController::class)->except(['create','show']);
-
-
+        //mail
         Route::get('mail', [MailController::class,'index'])->name('mail');
-
-
         Route::post('sendMail', [MailController::class,'sendMail'])->name('sendMail');
 
 

@@ -9,6 +9,7 @@ class Categories extends Model
 {
     use HasFactory;
 
+    // public $translatable = ['name'];
 
     protected $fillable = ['name','image'];
 

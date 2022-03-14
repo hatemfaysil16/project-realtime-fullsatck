@@ -24,7 +24,7 @@
        <!-- top bar right -->
        <ul class="nav navbar-nav ml-auto">
 
-           {{--  <div class="btn-group mb-1">
+            <div class="btn-group mb-1">
                <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                    @if (App::getLocale() == 'ar')
                        {{ LaravelLocalization::getCurrentLocaleName() }}
@@ -41,7 +41,7 @@
                        </a>
                    @endforeach
                </div>
-           </div>  --}}
+           </div>
 
            <li class="nav-item dropdown mr-30">
                <a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">

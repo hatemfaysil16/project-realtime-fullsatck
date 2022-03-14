@@ -4,6 +4,9 @@ $(document).ready(function() {
         var reader = new FileReader();
         reader.onload = function(e) {
             $('#mainThmb').attr('src', e.target.result);
+            $('#open').click(function(e) {
+                $('#mainThmb').attr('src', '');
+            })
         }
         reader.readAsDataURL(e.target.files['0']);
     });

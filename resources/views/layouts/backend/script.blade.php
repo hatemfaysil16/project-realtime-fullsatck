@@ -29,7 +29,10 @@
 <!-- custom -->
 <script src="{{ URL::asset('backend/assets/js/custom.js') }}"></script>
 
-<!-- JavaScript -->
+<!-- JavaScript valdation ajaxs -->
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
+{{--image dropify --}}
+<script src="{{ asset('backend/assets/js/dropzone/dropify.min.js') }}"></script>
+<script src="{{ asset('backend/assets/js/dropzone/dropzone.js') }}"></script>
 @yield('js')

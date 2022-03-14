@@ -17,23 +17,6 @@
                 <ul id="calendar-menu" class="collapse" data-parent="#sidebarnav">
 
                     <li> <a href="{{route('Categories.index')}}">الفئة</a> </li>
-
-                    <li> <a href="{{route('Instructors.index')}}">المدربين</a> </li>
-
-                    <li> <a href="{{route('Courses.index')}}">الكورسات</a> </li>
-
-                    <li> <a href="{{route('Certificates.index')}}">الشهادات</a> </li>
-
-                    <li> <a href="{{route('Serves.index')}}">الخدمات</a> </li>
-
-                    <li> <a href="{{route('Contact.index')}}">تواصل معنا</a> </li>
-
-                    <li> <a href="{{route('ContactwithCourses.index')}}">حجز الكورس</a> </li>
-
-
-                    <li> <a href="{{route('Media_center.index')}}"> المركز الاعلامي </a> </li>
-
-
                     <li> <a href="{{route('mail')}}">  Mail </a> </li>
 
 
@@ -50,7 +33,7 @@
                 </a>
                 <ul id="elements" class="collapse" data-parent="#sidebarnav">
 
-                    <li> <a href="{{route('Setting.index')}}">  وسائل التواصل الاجتماعي </a> </li>
+                    {{-- <li> <a href="{{route('Setting.index')}}">  وسائل التواصل الاجتماعي </a> </li> --}}
                 </ul>
             </li>
 

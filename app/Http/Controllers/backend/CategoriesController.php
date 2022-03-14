@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
+use App\Repository\CategoryRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Image;
@@ -10,12 +11,12 @@ use Carbon\Carbon;
 
 class CategoriesController extends Controller
 {
-
-    // <td><a  data-fslightbox="gallery" href=""><img  class="container" style="width: 10rem;" src="../upload/backend/Categories/' + item.image + '" alt=""></a></td>\
-
-
-    // <td><img class="container" style="width: 10rem;" src="../upload/backend/Categories/' + item.image + '" alt=""></td>\
-
+    // CategoryRepository
+    protected $RepositoryCategory;
+    public function __construct(CategoryRepository $RepositoryCategory)
+    {
+        $this->RepositoryCategory = $RepositoryCategory;
+    }
 
     public function index()
     {
@@ -24,7 +25,7 @@ class CategoriesController extends Controller
 
     public function fetchData()
     {
-        $Categories = Categories::all();
+        $Categories = $this->RepositoryCategory->all();
         return response()->json([
             'Categories'=>$Categories,
         ]);
@@ -61,7 +62,7 @@ class CategoriesController extends Controller
                 $save_url = $name_gen;
             }
 
-            Categories::create([
+            $this->RepositoryCategory->store([
                 'name'=>$request->name,
                 'image'=>$save_url,
                 'created_at'=>Carbon::now(),
@@ -78,7 +79,8 @@ class CategoriesController extends Controller
 
     public function edit($id)
     {
-        $Categories = Categories::find($id);
+        $Categories = $this->RepositoryCategory->get($id);
+
         if($Categories)
         {
             return response()->json([
@@ -130,11 +132,12 @@ class CategoriesController extends Controller
                     unlink(public_path(Categories::IMAGE_PATH.$request->old_image));
                 }
 
-                Categories::find($id)->update([
+                $this->RepositoryCategory->update($id,[
                     'name'=> $request->name,
                     'image'=>$save_url,
                     'created_at'=>Carbon::now(),
-                    ]);
+                   ]);
+
 
                 return response()->json([
                     'status'=>200,
@@ -142,11 +145,12 @@ class CategoriesController extends Controller
                 ]);
 
             }else{
-                Categories::find($id)->update([
+
+                $this->RepositoryCategory->update($id,[
                     'name'=> $request->name,
                     'image'=>$old_image,
                     'created_at'=>Carbon::now(),
-                    ]);
+                   ]);
 
                 return response()->json([
                     'status'=>200,

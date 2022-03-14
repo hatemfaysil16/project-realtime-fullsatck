@@ -13,8 +13,8 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="{{ URL::asset('backend/assets/images/favicon.ico') }}" type="image/x-icon"/>
-{{--  <link href="{{asset('backend/assets/css/fontawesome/css/all.css')}}" rel="stylesheet">  --}}
-{{--  <link href="{{asset('backend/assets/css/fontawesome/js/all.js')}}" rel="stylesheet">  --}}
+<link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/css/dropzone/dropzone.css') }}" />
+
 
 <!-- CSS -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
