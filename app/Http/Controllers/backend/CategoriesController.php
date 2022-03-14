@@ -26,8 +26,10 @@ class CategoriesController extends Controller
     public function fetchData()
     {
         $Categories = $this->RepositoryCategory->all();
+        $ConsteCategory =Categories::IMAGE_PATH;
         return response()->json([
             'Categories'=>$Categories,
+            'ConsteCategory'=>$ConsteCategory
         ]);
     }
 
@@ -83,9 +85,11 @@ class CategoriesController extends Controller
 
         if($Categories)
         {
+            $ConsteCategory =Categories::IMAGE_PATH;
             return response()->json([
                 'status'=>200,
                 'Categories'=> $Categories,
+                'ConsteCategory'=>$ConsteCategory
             ]);
         }
         else

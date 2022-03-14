@@ -1,6 +1,6 @@
 //realtime image
 $(document).ready(function() {
-    $('#realimage').change(function(e) {
+    $('#image').change(function(e) {
         var reader = new FileReader();
         reader.onload = function(e) {
             $('#mainThmb').attr('src', e.target.result);
@@ -41,10 +41,10 @@ $(document).ready(function() {
                     $('tbody').append('<tr>\
                         <td>' + (key + 1) + '</td>\
                         <td>' + item.name + '</td>\
-                        <td><a  data-fslightbox="gallery" href="../upload/backend/Categories/' + item.image + '"><img  class="container" style="width: 10rem;" src="../upload/backend/Categories/' + item.image + '" alt=""></a></td>\
+                        <td><a  data-fslightbox="gallery" href="../' + response.ConsteCategory + item.image + '"><img  class="container" style="width: 10rem;" src="../' + response.ConsteCategory + item.image + '" alt=""></a></td>\
                         <td><button type="button" value="' + item.id + '" class="btn btn-primary editbtn btn-sm">Edit</button>\
                         <button type="button" value="' + item.id + '" class="btn btn-danger delete_btn btn-sm">Delete</button>\
-                        <a class="btn btn-primary btn-sm"  data-fslightbox="gallery" href="../upload/backend/Categories/' + item.image + '">show</a></td>\
+                        <a class="btn btn-primary btn-sm"  data-fslightbox="gallery" href="../' + response.ConsteCategory + item.image + '">show</a></td>\
                     \</tr>');
                 });
             }
@@ -101,6 +101,7 @@ $(document).ready(function() {
             type: "GET",
             url: "edit-category/" + stud_id,
             success: function(response) {
+
                 if (response.status == 404) {
                     $('#success_message').addClass('alert alert-success');
                     $('#success_message').text(response.message);
@@ -110,7 +111,7 @@ $(document).ready(function() {
                 } else {
                     $('#name_s').val(response.Categories.name);
                     $('#old_image').val(response.Categories.image);
-                    $('#image_s').attr('src', `../upload/backend/Categories/${response.Categories.image}`);
+                    $('#image_s').attr('src', `../${response.ConsteCategory}${response.Categories.image}`);
                     $('#stud_id').val(stud_id);
                 }
             }
@@ -174,7 +175,6 @@ $(document).ready(function() {
         e.preventDefault();
 
         var id = $('#deleteimg_emp_id').val();
-        console.log(id);
 
         $.ajax({
             type: "DELETE",

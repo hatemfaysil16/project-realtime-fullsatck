@@ -17,11 +17,13 @@
                 </div>
 
 
-
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">image</label>
                     <input type="file" class="form-control" id="image" name="image">
                 </div>
+
+                <img src="" style="width:50%" id="mainThmb" alt="">
+
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" id="open">حفظ البينات </button>
@@ -39,7 +41,7 @@
         <form  id="UpdateEmployForm" method="post" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit & Update Student Data</h5>
+                    <h5 class="modal-title" id="editModalLabel">Edit & Update</h5>
 
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -51,7 +53,7 @@
 
                     <ul id="update_msgList"></ul>
 
-                    <input type="text" id="stud_id" name="id"/>
+                    <input type="hidden" id="stud_id" name="id"/>
 
                     <div class="form-group mb-3">
                         <label for="">Full Name</label>
@@ -60,8 +62,9 @@
                     <div class="form-group mb-3">
                         <label for="">image</label>
                         <input type="hidden" id="old_image" name="old_image">
-                        <img src="" id="image_s" name="image" alt=""/>
                         <input type="file" id="" name="image" class="form-control">
+                        <img src="" style="width: 40%" id="image_s" name="image" alt=""/>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -81,14 +84,14 @@
     <form  id="AddEmployeeForm" method="delete" enctype="multipart/form-data">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h4>Are you sure ? you want to delete this data?</h4>
-                <input type="text" id="deleteimg_emp_id">
+                <h4>هل تريد حذف الفئة؟</h4>
+                <input type="hidden" id="deleteimg_emp_id">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
