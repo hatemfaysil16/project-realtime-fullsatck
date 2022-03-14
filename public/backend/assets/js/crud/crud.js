@@ -41,10 +41,10 @@ $(document).ready(function() {
                     $('tbody').append('<tr>\
                         <td>' + (key + 1) + '</td>\
                         <td>' + item.name + '</td>\
-                        <td><a  data-fslightbox="gallery" href="../' + response.ConsteCategory + item.image + '"><img  class="container" style="width: 10rem;" src="../' + response.ConsteCategory + item.image + '" alt=""></a></td>\
+                        <td><a  data-fslightbox="gallery" href="../../' + response.ConsteCategory + item.image + '"><img  class="container" style="width: 10rem;" src="../../' + response.ConsteCategory + item.image + '" alt=""></a></td>\
                         <td><button type="button" value="' + item.id + '" class="btn btn-primary editbtn btn-sm">Edit</button>\
                         <button type="button" value="' + item.id + '" class="btn btn-danger delete_btn btn-sm">Delete</button>\
-                        <a class="btn btn-primary btn-sm"  data-fslightbox="gallery" href="../' + response.ConsteCategory + item.image + '">show</a></td>\
+                        <a class="btn btn-primary btn-sm"  data-fslightbox="gallery" href="../../' + response.ConsteCategory + item.image + '">show</a></td>\
                     \</tr>');
                 });
             }
@@ -111,7 +111,7 @@ $(document).ready(function() {
                 } else {
                     $('#name_s').val(response.Categories.name);
                     $('#old_image').val(response.Categories.image);
-                    $('#image_s').attr('src', `../${response.ConsteCategory}${response.Categories.image}`);
+                    $('#image_s').attr('src', `../../${response.ConsteCategory}${response.Categories.image}`);
                     $('#stud_id').val(stud_id);
                 }
             }
