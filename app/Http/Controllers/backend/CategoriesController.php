@@ -27,9 +27,12 @@ class CategoriesController extends Controller
     {
         $Categories = $this->RepositoryCategory->all();
         $ConsteCategory =Categories::IMAGE_PATH;
+        $url = env('APP_URL');
+        // dd($a);
         return response()->json([
             'Categories'=>$Categories,
-            'ConsteCategory'=>$ConsteCategory
+            'ConsteCategory'=>$ConsteCategory,
+            'url'=>$url,
         ]);
     }
 

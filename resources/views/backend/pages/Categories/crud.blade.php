@@ -16,7 +16,6 @@
                     <input type="text" class="form-control" id="name" name="name">
                 </div>
 
-
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">image</label>
                     <input type="file" class="form-control" id="image" name="image">

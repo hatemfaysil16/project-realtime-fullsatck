@@ -38,10 +38,12 @@ $(document).ready(function() {
             success: function(response) {
                 $('tbody').html("");
                 $.each(response.Categories, function(key, item) {
+                    console.log(response.url);
                     $('tbody').append('<tr>\
                         <td>' + (key + 1) + '</td>\
                         <td>' + item.name + '</td>\
-                        <td><a  data-fslightbox="gallery" href="../../' + response.ConsteCategory + item.image + '"><img  class="container" style="width: 10rem;" src="../../' + response.ConsteCategory + item.image + '" alt=""></a></td>\
+                        <td><a  data-fslightbox="gallery" href="' +
+                        response.url + response.ConsteCategory + item.image + '"><img  class="container" style="width: 10rem;" src="' + response.url + response.ConsteCategory + item.image + '" alt=""></a></td>\
                         <td><button type="button" value="' + item.id + '" class="btn btn-primary editbtn btn-sm">Edit</button>\
                         <button type="button" value="' + item.id + '" class="btn btn-danger delete_btn btn-sm">Delete</button>\
                         <a class="btn btn-primary btn-sm"  data-fslightbox="gallery" href="../../' + response.ConsteCategory + item.image + '">show</a></td>\
