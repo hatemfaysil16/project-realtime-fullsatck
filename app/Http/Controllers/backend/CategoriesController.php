@@ -89,10 +89,12 @@ class CategoriesController extends Controller
         if($Categories)
         {
             $ConsteCategory =Categories::IMAGE_PATH;
+            $url = env('APP_URL');
             return response()->json([
                 'status'=>200,
                 'Categories'=> $Categories,
-                'ConsteCategory'=>$ConsteCategory
+                'ConsteCategory'=>$ConsteCategory,
+                'url'=>$url,
             ]);
         }
         else
