@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Image;
 use Carbon\Carbon;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 
 class CategoriesController extends Controller
 {
@@ -20,19 +22,23 @@ class CategoriesController extends Controller
 
     public function index()
     {
+
+
         return view('backend.pages.Categories.index');
     }
 
     public function fetchData()
     {
         $Categories = $this->RepositoryCategory->all();
+
         $ConsteCategory =Categories::IMAGE_PATH;
         $url = env('APP_URL');
-        // dd($a);
+        $LocalizationCurrent = LaravelLocalization::getCurrentLocale();
         return response()->json([
             'Categories'=>$Categories,
             'ConsteCategory'=>$ConsteCategory,
             'url'=>$url,
+            'LocalizationCurrent'=>$LocalizationCurrent
         ]);
     }
 
@@ -45,8 +51,8 @@ class CategoriesController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name'=> 'required',
-            'image'=> 'required',
+            // 'name_ar'=> 'required',
+            // 'image'=> 'required',
         ]);
 
 
@@ -68,18 +74,18 @@ class CategoriesController extends Controller
             }
 
             $this->RepositoryCategory->store([
-                'name'=>$request->name,
+                'name'=>['ar'=>$request->name_ar,'en'=>$request->name_en],
                 'image'=>$save_url,
                 'created_at'=>Carbon::now(),
             ]);
 
             return response()->json([
                 'status'=>200,
-                'message'=>'success add data Categories',
+                'message'=>__("backend/category.store") ,
             ]);
         }
 
-
+        // success add data Categories
     }
 
     public function edit($id)
@@ -90,18 +96,20 @@ class CategoriesController extends Controller
         {
             $ConsteCategory =Categories::IMAGE_PATH;
             $url = env('APP_URL');
+            $LocalizationCurrent = LaravelLocalization::getCurrentLocale();
             return response()->json([
                 'status'=>200,
                 'Categories'=> $Categories,
                 'ConsteCategory'=>$ConsteCategory,
                 'url'=>$url,
+                'LocalizationCurrent'=>$LocalizationCurrent
             ]);
         }
         else
         {
             return response()->json([
                 'status'=>404,
-                'message'=>'not found data.'
+                'message'=>__("backend/category.notFound") ,
             ]);
         }
     }
@@ -150,7 +158,7 @@ class CategoriesController extends Controller
 
                 return response()->json([
                     'status'=>200,
-                    'message'=>'success update data',
+                    'message'=>__("backend/category.update"),
                 ]);
 
             }else{
@@ -163,7 +171,7 @@ class CategoriesController extends Controller
 
                 return response()->json([
                     'status'=>200,
-                    'message'=>'success update data',
+                    'message'=>__("backend/category.notFound"),
                 ]);
             }
 
@@ -186,13 +194,14 @@ class CategoriesController extends Controller
                 $delete->delete();
                 return response()->json([
                     'status'=>200,
-                    'message'=>'Categories Deleted Successfully.'
+                    'message'=>__("backend/category.delete"),
                 ]);
+
 
             }else{
                 return response()->json([
                     'status'=>404,
-                    'message'=>'No Student Found.'
+                    'message'=>__("backend/category.notFound"),
                 ]);
             }
 

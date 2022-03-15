@@ -11,41 +11,29 @@
             <!-- menu item calendar-->
             <li>
                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu">
-                    <div class="pull-left"><i class="ti-calendar"></i><span class="right-nav-text">الاقسام</span></div>
+                    <div class="pull-left"><i class="ti-calendar"></i><span class="right-nav-text">{{__('backend/dashboard.sections') }}</span></div>
                     <div class="pull-right"><i class="ti-plus"></i></div><div class="clearfix"></div>
                 </a>
                 <ul id="calendar-menu" class="collapse" data-parent="#sidebarnav">
 
-                    <li> <a href="{{route('Categories.index')}}">الفئة</a> </li>
-                    <li> <a href="{{route('mail')}}">  Mail </a> </li>
-
+                    <li> <a href="{{route('Categories.index')}}">{{__('backend/dashboard.category') }}</a> </li>
+                    <li> <a href="{{route('mail')}}">  {{__('backend/dashboard.Mail') }} </a> </li>
 
 
 
                 </ul>
             </li>
 
-
-            <li>
-                <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements">
-                    <div class="pull-left"><i class="ti-settings"></i><span class="right-nav-text">الإعدادات</span></div>
-                    <div class="pull-right"><i class="ti-plus"></i></div><div class="clearfix"></div>
-                </a>
-                <ul id="elements" class="collapse" data-parent="#sidebarnav">
-
-                    {{-- <li> <a href="{{route('Setting.index')}}">  وسائل التواصل الاجتماعي </a> </li> --}}
-                </ul>
-            </li>
 
 
             <li>
                 <a href="javascript:void(0);" data-toggle="collapse" data-target="#chart">
-                    <div class="pull-left"><i class="ti-pie-chart"></i><span class="right-nav-text">المستخدمين</span></div>
+                    <div class="pull-left"><i class="ti-pie-chart"></i><span class="right-nav-text">{{__('backend/dashboard.users') }}</span></div>
                     <div class="pull-right"><i class="ti-plus"></i></div><div class="clearfix"></div>
                 </a>
                 <ul id="chart" class="collapse" data-parent="#sidebarnav">
-                    <li> <a href="{{route('roles.index')}}">صلاحيات المستخدمين</a> </li>
-                    <li> <a href="{{route('users.index')}}">قائمة المستخدمين</a> </li>
+                    <li> <a href="{{route('roles.index')}}">{{__('backend/dashboard.User_Permissions') }}</a> </li>
+                    <li> <a href="{{route('users.index')}}">{{__('backend/dashboard.User_List') }}</a> </li>
                 </ul>
             </li>
 

@@ -4,16 +4,22 @@
     <form  id="AddEmployeeForm" method="post" enctype="multipart/form-data">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> اضافة الفئة </h5>
+                <h5 class="modal-title" id="exampleModalLabel"> {{__('backend/category.Add_category') }} </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <ul class="alert alert-warning d-none" id="save_errorList"></ul>
+
+
                 <div class="form-group">
                     <label for="exampleInputEmail1">اسم </label>
-                    <input type="text" class="form-control" id="name" name="name">
+                    <input type="text" placeholder="ادخال الاسم باللغة العربيه" class="form-control" id="name_ar" name="name_ar">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">name </label>
+                    <input type="text" class="form-control" placeholder="Enter the name in English" id="name_en" name="name_en">
                 </div>
 
                 <div class="form-group">
@@ -25,8 +31,9 @@
 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" id="open">حفظ البينات </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
+
+                <button type="submit" class="btn btn-primary" id="open">{{__('backend/category.save') }} </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('backend/category.close') }}</button>
             </div>
         </div>
     </form>
@@ -40,7 +47,7 @@
         <form  id="UpdateEmployForm" method="post" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit & Update</h5>
+                    <h5 class="modal-title" id="editModalLabel">{{__('backend/category.title_name') }}</h5>
 
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -55,11 +62,11 @@
                     <input type="hidden" id="stud_id" name="id"/>
 
                     <div class="form-group mb-3">
-                        <label for="">Full Name</label>
+                        <label for="">{{__('backend/category.Name_field') }}</label>
                         <input type="text" id="name_s" name="name" required class="form-control"/>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="">image</label>
+                        <label for="">{{__('backend/category.image') }}</label>
                         <input type="hidden" id="old_image" name="old_image">
                         <input type="file" id="" name="image" class="form-control">
                         <img src="" style="width: 40%" id="image_s" name="image" alt=""/>
@@ -67,8 +74,14 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary update_student">Update</button>
+
+                    @if(LaravelLocalization::getCurrentLocale()=='en')
+                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('backend/category.close') }}</button>
+                        <button type="submit" class="btn btn-primary update_student">{{__('backend/category.save') }}</button>
+                       @elseif (LaravelLocalization::getCurrentLocale()=='ar')
+                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('backend/category.close') }}</button>
+                       <button type="submit" class="btn btn-primary update_student">{{__('backend/category.save') }}</button>
+                    @endif
                 </div>
 
             </div>
@@ -83,18 +96,25 @@
     <form  id="AddEmployeeForm" method="delete" enctype="multipart/form-data">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{__('backend/category.Delete') }}</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h4>هل تريد حذف الفئة؟</h4>
+                <h4>{{__('backend/category.question_delete') }}</h4>
                 <input type="hidden" id="deleteimg_emp_id">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="delete_employee_btn btn btn-primary">yes Delete</button>
+                @if(LaravelLocalization::getCurrentLocale()=='en')
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('backend/category.close') }}</button>
+                <button type="button" class="delete_employee_btn btn btn-primary">{{__('backend/category.yes') }} </button>
+                   @elseif (LaravelLocalization::getCurrentLocale()=='ar')
+                   <button type="button" class="delete_employee_btn btn btn-primary">{{__('backend/category.yes') }} </button>
+                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('backend/category.close') }}</button>
+
+                @endif
+
             </div>
         </div>
     </form>

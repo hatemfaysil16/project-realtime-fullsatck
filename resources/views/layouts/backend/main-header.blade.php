@@ -24,24 +24,26 @@
        <!-- top bar right -->
        <ul class="nav navbar-nav ml-auto">
 
-            <div class="btn-group mb-1">
-               <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   @if (App::getLocale() == 'ar')
-                       {{ LaravelLocalization::getCurrentLocaleName() }}
-                       <img src="{{ URL::asset('backend/assets/images/flags/EG.png') }}" alt="">
-                   @else
-                       {{ LaravelLocalization::getCurrentLocaleName() }}
-                       <img src="{{ URL::asset('backend/assets/images/flags/US.png') }}" alt="">
-                   @endif
-               </button>
-               <div class="dropdown-menu">
-                   @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                       <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                           {{ $properties['native'] }}
-                       </a>
-                   @endforeach
-               </div>
-           </div>
+           <div class="dropdown btn-group mr-4">
+            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                @if (App::getLocale() == 'ar')
+                {{ LaravelLocalization::getCurrentLocaleName() }}
+                <img src="{{ URL::asset('backend/assets/images/flags/EG.png') }}" alt="">
+            @else
+                {{ LaravelLocalization::getCurrentLocaleName() }}
+                <img src="{{ URL::asset('backend/assets/images/flags/US.png') }}" alt="">
+            @endif
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                    {{ $properties['native'] }}
+                </a>
+            @endforeach
+            </ul>
+          </div>
+
+
 
            <li class="nav-item dropdown mr-30">
                <a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -57,13 +59,8 @@
                        </div>
                    </div>
                    <div class="dropdown-divider"></div>
-                   <a class="dropdown-item" href="#"><i class="text-secondary ti-reload"></i>Activity</a>
-                   <a class="dropdown-item" href="#"><i class="text-success ti-email"></i>Messages</a>
-                   <a class="dropdown-item" href="#"><i class="text-warning ti-user"></i>Profile</a>
-                   <a class="dropdown-item" href="#"><i class="text-dark ti-layers-alt"></i>Projects <span class="badge badge-info">6</span> </a>
-                   <div class="dropdown-divider"></div>
                    <a class="dropdown-item" href="{{ route('users.index') }}"><i class="text-info ti-settings"></i>Settings</a>
-                   <a class="dropdown-item"  href="{{ route('admin.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="text-danger ti-unlock"></i>تسجيل الخروج</a>
+                   <a class="dropdown-item"  href="{{ route('admin.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="text-danger ti-unlock"></i>{{__('backend/dashboard.logout') }}</a>
                    <form id="logout-form" action="{{  \LaravelLocalization::localizeURL('admin/logout') }}" method="POST" style="display: none;">
                        @csrf
                    </form>

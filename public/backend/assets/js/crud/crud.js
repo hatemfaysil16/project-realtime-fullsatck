@@ -37,10 +37,18 @@ $(document).ready(function() {
             dataType: "json",
             success: function(response) {
                 $('tbody').html("");
+
                 $.each(response.Categories, function(key, item) {
+
+                    if (response.LocalizationCurrent == 'en') {
+                        var name = item.name.en;
+                    } else if (response.LocalizationCurrent == 'ar') {
+                        var name = item.name.ar;
+                    }
+
                     $('tbody').append('<tr>\
                         <td>' + (key + 1) + '</td>\
-                        <td>' + item.name + '</td>\
+                        <td>' + name + '</td>\
                         <td><a  data-fslightbox="gallery" href="' + response.url + response.ConsteCategory + item.image + '"><img  class="container" style="width: 10rem;" src="' + response.url + response.ConsteCategory + item.image + '" alt=""></a></td>\
                         <td><button type="button" value="' + item.id + '" class="btn btn-primary editbtn btn-sm">Edit</button>\
                         <button type="button" value="' + item.id + '" class="btn btn-danger delete_btn btn-sm">Delete</button>\
@@ -101,7 +109,6 @@ $(document).ready(function() {
             type: "GET",
             url: "edit-category/" + stud_id,
             success: function(response) {
-
                 if (response.status == 404) {
                     $('#success_message').addClass('alert alert-success');
                     $('#success_message').text(response.message);
@@ -109,7 +116,13 @@ $(document).ready(function() {
                     alertify.set('notifier', 'position', 'top-right');
                     alertify.success(response.message);
                 } else {
-                    $('#name_s').val(response.Categories.name);
+                    if (response.LocalizationCurrent == 'en') {
+                        var name = response.Categories.name.en;
+                    } else if (response.LocalizationCurrent == 'ar') {
+                        var name = response.Categories.name.ar;
+                    }
+
+                    $('#name_s').val(name);
                     $('#old_image').val(response.Categories.image);
                     $('#image_s').attr('src', `${response.url}${response.ConsteCategory}${response.Categories.image}`);
                     $('#stud_id').val(stud_id);
