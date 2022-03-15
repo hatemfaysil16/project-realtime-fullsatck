@@ -1,26 +1,31 @@
 <?php
 
 namespace App\Repository;
-use App\Models\Categories;
 use App\Repository\interfaces\CrudInterface;
+use App\Models\Categories;
 
 
 class CategoryRepository implements CrudInterface {
+   private  $category;
 
+    public function __construct(Categories $category )
+    {
+        $this->category = $category;
+    }
     public function all(){
-       return Categories::all();
+       return $this->category->all();
     }
 
     public function get($id){
-        return Categories::find($id);
+        return $this->category->find($id);
     }
 
     public function store(array $data){
-        return Categories::create($data);
+        return $this->category->create($data);
     }
 
     public function update($id,array $data){
-        return Categories::find($id)->update($data);
+        return $this->category->find($id)->update($data);
     }
 
 }

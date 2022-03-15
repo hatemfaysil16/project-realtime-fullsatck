@@ -20,10 +20,6 @@ class Categories extends Model
 
     const IMAGE_PATH='upload/backend/Categories/';
 
-        public function courses()
-    {
-        return $this->hasMany(Courses::class);
-    }
 
 
 
