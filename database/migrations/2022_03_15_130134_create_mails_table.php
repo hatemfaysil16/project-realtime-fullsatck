@@ -18,6 +18,8 @@ class CreateMailsTable extends Migration
             $table->longText('users');
             $table->longText('subject');
             $table->longText('body');
+            $table->boolean('active');
+
             $table->timestamps();
         });
     }

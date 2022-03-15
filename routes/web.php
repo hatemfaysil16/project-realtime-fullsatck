@@ -71,6 +71,17 @@ Route::group(
         Route::delete('delete-student/{id}', [CategoriesController::class, 'destroy']);
 
 
+
+        // slider
+        Route::get('slider', [sliderController::class, 'inwdex'])->name('slider.index');
+        // Route::get('fetch-Data', [sliderController::class, 'fetchData']);
+        // Route::get('edit-category/{id}', [sliderController::class, 'edit']);
+        // Route::post('slider/store', [sliderController::class, 'store']);
+        // Route::post('category-update/{id}', [sliderController::class, 'update']);
+        // Route::delete('delete-student/{id}', [sliderController::class, 'destroy']);
+
+
+
         //mail
         Route::get('mail', [MailController::class,'index'])->name('mail');
         Route::post('sendMail', [MailController::class,'sendMail'])->name('sendMail');

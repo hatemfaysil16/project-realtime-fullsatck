@@ -12,7 +12,8 @@ class OurTeam extends Model
     protected $fillable = [
         'name',
         'image',
-        'description'
+        'description',
+        'active'
     ];
 
 }

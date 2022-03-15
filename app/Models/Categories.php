@@ -15,7 +15,7 @@ class Categories extends Model
 
     public $translatable = ['name'];
 
-    protected $fillable = ['name','image'];
+    protected $fillable = ['name','image','active'];
 
 
     const IMAGE_PATH='upload/backend/Categories/';

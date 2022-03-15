@@ -18,6 +18,8 @@ class CreateServicesTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('fontAwesome');
+            $table->boolean('active');
+
             $table->timestamps();
         });
     }

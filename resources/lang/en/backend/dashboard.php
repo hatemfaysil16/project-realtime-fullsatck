@@ -10,6 +10,8 @@ return [
     'users'=>'users',
     'User_Permissions'=>'User Permissions',
     'User_List'=>'User List',
+    'slider'=>'slider',
+
 
     'logout'=>'logout ',
 

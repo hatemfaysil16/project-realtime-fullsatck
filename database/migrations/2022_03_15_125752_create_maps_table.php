@@ -17,6 +17,8 @@ class CreateMapsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('iframe');
+            $table->boolean('active');
+
             $table->timestamps();
         });
     }

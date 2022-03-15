@@ -18,6 +18,8 @@ class CreateOurTeamsTable extends Migration
             $table->string('name');
             $table->string('image');
             $table->text('description');
+            $table->boolean('active');
+
             $table->timestamps();
         });
     }

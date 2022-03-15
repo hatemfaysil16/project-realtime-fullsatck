@@ -15,5 +15,6 @@ class SocialVideo extends Model
         'youtube',
         'image',
         'description',
+        'active'
     ];
 }

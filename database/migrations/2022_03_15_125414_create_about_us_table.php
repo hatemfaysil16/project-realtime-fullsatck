@@ -18,6 +18,8 @@ class CreateAboutUsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->text('fullDescription');
+            $table->boolean('active');
+
             $table->timestamps();
         });
     }

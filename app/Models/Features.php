@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Features extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','fontAwesome'];
+    protected $fillable = ['name','fontAwesome','active'];
 
 }

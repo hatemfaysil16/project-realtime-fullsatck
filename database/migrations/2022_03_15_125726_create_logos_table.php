@@ -17,6 +17,8 @@ class CreateLogosTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('image');
+            $table->boolean('active');
+
             $table->timestamps();
         });
     }

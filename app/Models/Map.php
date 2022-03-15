@@ -9,6 +9,6 @@ class Map extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','iframe'];
+    protected $fillable = ['name','iframe','active'];
 
 }

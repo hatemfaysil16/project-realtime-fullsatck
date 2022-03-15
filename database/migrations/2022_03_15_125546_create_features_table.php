@@ -17,6 +17,8 @@ class CreateFeaturesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('fontAwesome');
+            $table->boolean('active');
+
             $table->timestamps();
         });
     }

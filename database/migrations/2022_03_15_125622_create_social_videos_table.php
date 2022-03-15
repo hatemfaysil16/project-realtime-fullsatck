@@ -20,6 +20,8 @@ class CreateSocialVideosTable extends Migration
             $table->string('youtube');
             $table->string('image');
             $table->text('description');
+            $table->boolean('active');
+
             $table->timestamps();
         });
     }

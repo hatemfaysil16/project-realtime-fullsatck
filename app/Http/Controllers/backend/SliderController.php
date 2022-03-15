@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
-use App\Models\Categories;
-use App\Repository\CategoryRepository;
+use App\Models\Slider;
+use App\Repository\SliderRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Image;
@@ -11,27 +11,25 @@ use Carbon\Carbon;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
-class CategoriesController extends Controller
+class SliderController extends Controller
 {
-    // CategoryRepository
-    protected $RepositoryCategory;
-    public function __construct(CategoryRepository $RepositoryCategory)
+    // SliderRepository
+    protected $RepositorySlider;
+    public function __construct(SliderRepository $RepositorySlider)
     {
-        $this->RepositoryCategory = $RepositoryCategory;
+        $this->RepositorySlider = $RepositorySlider;
     }
 
     public function index()
     {
-
-
-        return view('backend.pages.Categories.index');
+        return view('backend.pages.slider.index');
     }
 
     public function fetchData()
     {
-        $Categories = $this->RepositoryCategory->all();
+        $Categories = $this->RepositorySlider->all();
 
-        $ConsteCategory =Categories::IMAGE_PATH;
+        $ConsteCategory =Slider::IMAGE_PATH;
         $url = env('APP_URL');
         $LocalizationCurrent = LaravelLocalization::getCurrentLocale();
         return response()->json([
@@ -44,7 +42,7 @@ class CategoriesController extends Controller
 
     public function create()
     {
-        return view('backend.pages.Categories.create');
+        return view('backend.pages.slider.create');
     }
 
     public function store(Request $request)
@@ -70,11 +68,11 @@ class CategoriesController extends Controller
             {
                 $image = $request->file('image');
                 $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-                Image::make($image)->resize(300,300)->Save(public_path(Categories::IMAGE_PATH.$name_gen));
+                Image::make($image)->resize(300,300)->Save(public_path(Slider::IMAGE_PATH.$name_gen));
                 $save_url = $name_gen;
             }
 
-            $this->RepositoryCategory->store([
+            $this->RepositorySlider->store([
                 'name'=>['ar'=>$request->name_ar,'en'=>$request->name_en],
                 'image'=>$save_url,
                 'created_at'=>Carbon::now(),
@@ -91,11 +89,11 @@ class CategoriesController extends Controller
 
     public function edit($id)
     {
-        $Categories = $this->RepositoryCategory->get($id);
+        $Categories = $this->RepositorySlider->get($id);
 
         if($Categories)
         {
-            $ConsteCategory =Categories::IMAGE_PATH;
+            $ConsteCategory =Slider::IMAGE_PATH;
             $url = env('APP_URL');
             $LocalizationCurrent = LaravelLocalization::getCurrentLocale();
             return response()->json([
@@ -142,15 +140,15 @@ class CategoriesController extends Controller
             if ($brand_image) {
                 $image = $request->file('image');
                 $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-                Image::make($image)->resize(300, 300)->Save(public_path(Categories::IMAGE_PATH.$name_gen));
+                Image::make($image)->resize(300, 300)->Save(public_path(Slider::IMAGE_PATH.$name_gen));
                 $save_url = $name_gen;
 
 
-                if (file_exists(public_path(Categories::IMAGE_PATH.$request->old_image))) {
-                    unlink(public_path(Categories::IMAGE_PATH.$request->old_image));
+                if (file_exists(public_path(Slider::IMAGE_PATH.$request->old_image))) {
+                    unlink(public_path(Slider::IMAGE_PATH.$request->old_image));
                 }
 
-                $this->RepositoryCategory->update($id,[
+                $this->RepositorySlider->update($id,[
                     'name'=> $request->name,
                     'image'=>$save_url,
                     'created_at'=>Carbon::now(),
@@ -164,7 +162,7 @@ class CategoriesController extends Controller
 
             }else{
 
-                $this->RepositoryCategory->update($id,[
+                $this->RepositorySlider->update($id,[
                     'name'=> $request->name,
                     'image'=>$old_image,
                     'created_at'=>Carbon::now(),
@@ -185,12 +183,12 @@ class CategoriesController extends Controller
 
     public function destroy($id)
     {
-            $delete = Categories::find($id);
+            $delete = Slider::find($id);
             if($delete)
             {
                 $old_image = $delete->image;
-                if (file_exists(public_path(Categories::IMAGE_PATH.$old_image))) {
-                    unlink(public_path(Categories::IMAGE_PATH.$old_image));
+                if (file_exists(public_path(Slider::IMAGE_PATH.$old_image))) {
+                    unlink(public_path(Slider::IMAGE_PATH.$old_image));
                 }
                 $delete->delete();
                 return response()->json([

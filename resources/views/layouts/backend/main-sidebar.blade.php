@@ -18,7 +18,7 @@
 
                     <li> <a href="{{route('Categories.index')}}">{{__('backend/dashboard.category') }}</a> </li>
                     <li> <a href="{{route('mail')}}">  {{__('backend/dashboard.Mail') }} </a> </li>
-
+                    <li> <a href="{{route('slider.index')}}">  {{__('backend/dashboard.slider') }} </a> </li>
 
 
                 </ul>
