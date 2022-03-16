@@ -33,12 +33,12 @@ $(document).ready(function() {
     function fetchData() {
         $.ajax({
             type: "GET",
-            url: "/admin/fetch-Data",
+            url: "/admin/slider/fetch-Data",
             dataType: "json",
             success: function(response) {
                 $('tbody').html("");
 
-                $.each(response.Categories, function(key, item) {
+                $.each(response.AllData, function(key, item) {
 
                     if (response.LocalizationCurrent == 'en') {
                         var name = item.name.en;
@@ -46,13 +46,21 @@ $(document).ready(function() {
                         var name = item.name.ar;
                     }
 
+
+                    if (item.active ==1) {
+                        var active = 'active';
+                    } else if (item.active == 0) {
+                        var active = 'not active';
+                    }
+
                     $('tbody').append('<tr>\
                         <td>' + (key + 1) + '</td>\
                         <td>' + name + '</td>\
-                        <td><a  data-fslightbox="gallery" href="' + response.url + response.ConsteCategory + item.image + '"><img  class="container" style="width: 10rem;" src="' + response.url + response.ConsteCategory + item.image + '" alt=""></a></td>\
+                        <td><span class="badge badge-success badge-pill">'+active+'</span></td>\
+                        <td><a  data-fslightbox="gallery" href="' + response.url + response.ConstImage + item.image + '"><img  class="container" style="width: 10rem;" src="' + response.url + response.ConstImage + item.image + '" alt=""></a></td>\
                         <td><button type="button" value="' + item.id + '" class="btn btn-primary editbtn btn-sm">Edit</button>\
                         <button type="button" value="' + item.id + '" class="btn btn-danger delete_btn btn-sm">Delete</button>\
-                        <a class="btn btn-primary btn-sm"  data-fslightbox="gallery" href="' + response.url + response.ConsteCategory + item.image + '">show</a></td>\
+                        <a class="btn btn-primary btn-sm"  data-fslightbox="gallery" href="' + response.url + response.ConstImage + item.image + '">show</a></td>\
                     \</tr>');
                 });
             }
@@ -68,7 +76,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            url: "Categories/store",
+            url: "slider/store",
             data: fotmData,
             contentType: false,
             processData: false,
@@ -107,8 +115,9 @@ $(document).ready(function() {
         $('#editModal').modal('show');
         $.ajax({
             type: "GET",
-            url: "edit-category/" + stud_id,
+            url: "slider/edit/" + stud_id,
             success: function(response) {
+                // console.log(response);
                 if (response.status == 404) {
                     $('#success_message').addClass('alert alert-success');
                     $('#success_message').text(response.message);
@@ -117,14 +126,36 @@ $(document).ready(function() {
                     alertify.success(response.message);
                 } else {
                     if (response.LocalizationCurrent == 'en') {
-                        var name = response.Categories.name.en;
+                        var name = response.dataFind.name.en;
                     } else if (response.LocalizationCurrent == 'ar') {
-                        var name = response.Categories.name.ar;
+                        var name = response.dataFind.name.ar;
+                    }
+
+                    if (response.LocalizationCurrent == 'en') {
+                        var description = response.dataFind.description.en;
+                    } else if (response.LocalizationCurrent == 'ar') {
+                        var description = response.dataFind.description.ar;
                     }
 
                     $('#name_s').val(name);
-                    $('#old_image').val(response.Categories.image);
-                    $('#image_s').attr('src', `${response.url}${response.ConsteCategory}${response.Categories.image}`);
+                    // console.log(response.Categories.active);
+
+                    $('#active_s').val(response.dataFind.active);
+
+
+                    if($('#active_s').val()==true){
+                        console.log($('#active_s').val()==true);
+                        $('#active_s').attr('checked',"1");
+                    }else if($('#active_s').val()==0){
+                        console.log($('#active_s').val()==0);
+                        $('#active_s').removeAttr('checked');
+                    }
+
+
+
+                    $('#description_s').val(description);
+                    $('#old_image').val(response.dataFind.image);
+                    $('#image_s').attr('src', `${response.url}${response.ConstImage}${response.dataFind.image}`);
                     $('#stud_id').val(stud_id);
                 }
             }
@@ -142,7 +173,7 @@ $(document).ready(function() {
         $.ajax({
             type: "post",
 
-            url: "category-update/" + id,
+            url: "slider/update/" + id,
             data: EditFormData,
             dataType: "json",
             contentType: false,
@@ -191,7 +222,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "DELETE",
-            url: "delete-student/" + id,
+            url: "slider/delete/" + id,
             dataType: "json",
             success: function(response) {
                 if (response.status == 404) {

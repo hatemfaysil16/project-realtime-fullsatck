@@ -17,7 +17,7 @@ class CreateServicesTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->string('fontAwesome');
+            $table->string('image')->nullable();
             $table->boolean('active');
 
             $table->timestamps();

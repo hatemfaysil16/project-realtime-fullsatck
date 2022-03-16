@@ -19,6 +19,11 @@
                     <li> <a href="{{route('Categories.index')}}">{{__('backend/dashboard.category') }}</a> </li>
                     <li> <a href="{{route('mail')}}">  {{__('backend/dashboard.Mail') }} </a> </li>
                     <li> <a href="{{route('slider.index')}}">  {{__('backend/dashboard.slider') }} </a> </li>
+                    <li> <a href="{{route('OurTeam.index')}}">  {{__('backend/OurTeam.Add_ourTeam') }} </a> </li>
+                    <li> <a href="{{route('services.index')}}">  {{__('backend/services.Add_services') }} </a> </li>
+                    <li> <a href="{{route('aboutUs.index')}}">  {{__('backend/aboutUs.Add_aboutUs') }} </a> </li>
+                    <li> <a href="{{route('question.index')}}">  {{__('backend/question.question') }} </a> </li>
+
 
 
                 </ul>

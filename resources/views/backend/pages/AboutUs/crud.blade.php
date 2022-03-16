@@ -1,10 +1,10 @@
 {{--start add Modal--}}
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-    <form  id="AddEmployeeForm" method="post" enctype="multipart/form-data">
+    <form  id="AddEmployeeForm" method="post" >
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> {{__('backend/slider.Add_slider') }} </h5>
+                <h5 class="modal-title" id="exampleModalLabel"> {{__('backend/aboutUs.Add_aboutUs') }} </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -31,12 +31,15 @@
                     <textarea placeholder="Enter a description in English" class="form-control" id="exampleFormControlTextarea2" rows="15" name="description_en"></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">image</label>
-                    <input type="file" class="form-control" id="image" name="image">
-                </div>
 
-                <img src="" style="width:50%" id="mainThmb" alt="">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">وصف كامل</label>
+                    <textarea placeholder="ادخال وصف كامل باللغة العربيه" class="form-control" id="exampleFormControlTextarea1" rows="15" name="fullDescription_ar"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">fullDescription </label>
+                    <textarea placeholder="Enter a fullDescription in English" class="form-control" id="exampleFormControlTextarea2" rows="15" name="fullDescription_en"></textarea>
+                </div>
 
 
                 <div class="row">
@@ -66,10 +69,10 @@
 {{-- start Edit Modal --}}
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form  id="UpdateEmployForm" method="post" enctype="multipart/form-data">
+        <form  id="UpdateEmployForm" method="post" >
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">{{__('backend/slider.Add_slider') }}</h5>
+                    <h5 class="modal-title" id="editModalLabel">{{__('backend/aboutUs.Add_aboutUs') }}</h5>
 
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -92,12 +95,12 @@
                         <textarea placeholder="{{__('backend/public.placeholder') }}" class="form-control" id="description_s" rows="15" name="description"></textarea>
                     </div>
 
-                    <div class="form-group mb-3">
-                        <label for="">{{__('backend/public.image') }}</label>
-                        <input type="hidden" id="old_image" name="old_image">
-                        <input type="file" id="" name="image" class="form-control">
-                        <img src="" style="width: 40%" id="image_s" name="image" alt=""/>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">{{__('backend/public.description') }} </label>
+                        <textarea placeholder="{{__('backend/public.placeholder') }}" class="form-control" id="fullDescription_s" rows="15" name="fullDescription"></textarea>
                     </div>
+
                 </div>
 
                 <div class="row">
@@ -130,17 +133,17 @@
 {{--start delete Modal--}}
 <div class="modal fade" id="DeleteexampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-    <form  id="AddEmployeeForm" method="delete" enctype="multipart/form-data">
+    <form  id="AddEmployeeForm" method="delete" >
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">{{__('backend/public.Delete') }}</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <input type="hidden" id="deleteimg_emp_id">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h4>{{__('backend/slider.question_delete') }}</h4>
-                <input type="hidden" id="deleteimg_emp_id">
+                <h4>{{__('backend/aboutUs.question_delete') }}</h4>
             </div>
             <div class="modal-footer">
                 @if(LaravelLocalization::getCurrentLocale()=='en')

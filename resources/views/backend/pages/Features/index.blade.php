@@ -34,8 +34,8 @@
 
                                 <th>#</th>
                                 <th>{{__('backend/public.name') }}</th>
+                                <th>fontAwesome</th>
                                 <th>{{__('backend/public.active') }}</th>
-                                <th>{{__('backend/public.image') }}</th>
                                 <th>{{__('backend/public.operations') }}</th>
                             </tr>
                             </thead>
@@ -52,7 +52,7 @@
     <!-- end closed -->
 
     {{-- start Add create --}}
-    @include('backend.pages.Categories.crud')
+    @include('backend.pages.Features.crud')
 
 
 
@@ -63,7 +63,7 @@
 
 @section('js')
 <script src="{{ asset('backend/assets/js/fslightbox.js') }}"></script>
-<script src="{{ asset('backend/assets/js/crud/category.js') }}"></script>
+<script src="{{ asset('backend/assets/js/crud/Features.js') }}"></script>
 
 <script>
 

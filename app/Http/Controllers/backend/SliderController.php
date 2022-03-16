@@ -27,23 +27,20 @@ class SliderController extends Controller
 
     public function fetchData()
     {
-        $Categories = $this->RepositorySlider->all();
+        $AllData = $this->RepositorySlider->all();
 
-        $ConsteCategory =Slider::IMAGE_PATH;
+        $ConstImage =Slider::IMAGE_PATH;
         $url = env('APP_URL');
         $LocalizationCurrent = LaravelLocalization::getCurrentLocale();
         return response()->json([
-            'Categories'=>$Categories,
-            'ConsteCategory'=>$ConsteCategory,
+            'AllData'=>$AllData,
+            'ConstImage'=>$ConstImage,
             'url'=>$url,
             'LocalizationCurrent'=>$LocalizationCurrent
         ]);
     }
 
-    public function create()
-    {
-        return view('backend.pages.slider.create');
-    }
+
 
     public function store(Request $request)
     {
@@ -51,7 +48,9 @@ class SliderController extends Controller
         $validator = Validator::make($request->all(), [
             'name_ar'=> 'required',
             'name_en'=> 'required',
-            'image'=> 'required',
+            'description_ar'=> 'required',
+            'description_en'=> 'required',
+            'image'=> 'required|mimes:pdf,jpeg,png,jpg',
         ]);
 
 
@@ -74,7 +73,9 @@ class SliderController extends Controller
 
             $this->RepositorySlider->store([
                 'name'=>['ar'=>$request->name_ar,'en'=>$request->name_en],
+                'description'=>['ar'=>$request->description_ar,'en'=>$request->description_en],
                 'image'=>$save_url,
+                'active'=>($request->active?1:0),
                 'created_at'=>Carbon::now(),
             ]);
 
@@ -89,17 +90,17 @@ class SliderController extends Controller
 
     public function edit($id)
     {
-        $Categories = $this->RepositorySlider->get($id);
+        $dataFind = $this->RepositorySlider->get($id);
 
-        if($Categories)
+        if($dataFind)
         {
-            $ConsteCategory =Slider::IMAGE_PATH;
+            $ConstImage =Slider::IMAGE_PATH;
             $url = env('APP_URL');
             $LocalizationCurrent = LaravelLocalization::getCurrentLocale();
             return response()->json([
                 'status'=>200,
-                'Categories'=> $Categories,
-                'ConsteCategory'=>$ConsteCategory,
+                'dataFind'=> $dataFind,
+                'ConstImage'=>$ConstImage,
                 'url'=>$url,
                 'LocalizationCurrent'=>$LocalizationCurrent
             ]);
@@ -115,9 +116,11 @@ class SliderController extends Controller
 
     public function update(Request $request,$id)
     {
+        // dd($request);
         $validator = Validator::make($request->all(), [
             'name'=> 'required',
-            'image'=>'mimes:pdf,jpeg,png,jpg',
+            'description'=> 'required',
+            'image'=> 'mimes:pdf,jpeg,png,jpg',
         ]);
 
 
@@ -150,9 +153,12 @@ class SliderController extends Controller
 
                 $this->RepositorySlider->update($id,[
                     'name'=> $request->name,
+                    'description'=> $request->description,
+                    'active'=>($request->active_ss?1:0),
                     'image'=>$save_url,
                     'created_at'=>Carbon::now(),
                    ]);
+
 
 
                 return response()->json([
@@ -164,13 +170,15 @@ class SliderController extends Controller
 
                 $this->RepositorySlider->update($id,[
                     'name'=> $request->name,
+                    'description'=> $request->description,
+                    'active'=>($request->active?'1':'0'),
                     'image'=>$old_image,
                     'created_at'=>Carbon::now(),
                    ]);
 
                 return response()->json([
                     'status'=>200,
-                    'message'=>__("backend/validation.notFound"),
+                    'message'=>__("backend/validation.update"),
                 ]);
             }
 

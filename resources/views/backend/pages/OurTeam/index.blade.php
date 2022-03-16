@@ -3,7 +3,7 @@
 
 
 @section('title')
-    category
+slider
 @endsection
 
 @section('css')
@@ -22,7 +22,7 @@
 
                     @include('backend.massage')
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        {{__('backend/category.Add_category') }}
+                        {{__('backend/OurTeam.Add_ourTeam') }}
                     </button>
 
 
@@ -31,7 +31,7 @@
                             <thead>
                             <tr>
 
-
+                                AboutUs
                                 <th>#</th>
                                 <th>{{__('backend/public.name') }}</th>
                                 <th>{{__('backend/public.active') }}</th>
@@ -52,10 +52,7 @@
     <!-- end closed -->
 
     {{-- start Add create --}}
-    @include('backend.pages.Categories.crud')
-
-
-
+    @include('backend.pages.OurTeam.crud')
     {{-- end Add create --}}
 
 
@@ -63,7 +60,7 @@
 
 @section('js')
 <script src="{{ asset('backend/assets/js/fslightbox.js') }}"></script>
-<script src="{{ asset('backend/assets/js/crud/category.js') }}"></script>
+<script src="{{ asset('backend/assets/js/crud/AboutUs.js') }}"></script>
 
 <script>
 
