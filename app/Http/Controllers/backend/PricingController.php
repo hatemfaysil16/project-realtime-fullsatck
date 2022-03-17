@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
-use App\Models\Features;
-use App\Repository\FeaturesRepository;
+use App\Models\Pricing;
+use App\Repository\PricingRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
-class FeaturesController extends Controller
+class PricingController extends Controller
 {
-    // FeaturesRepository
-    protected $FeaturesRepository;
-    public function __construct(FeaturesRepository $FeaturesRepository)
+    // PricingRepository
+    protected $PricingRepository;
+    public function __construct(PricingRepository $PricingRepository)
     {
-        $this->FeaturesRepository = $FeaturesRepository;
+        $this->PricingRepository = $PricingRepository;
     }
 
     public function index()
     {
-        return view('backend.pages.Features.index');
+        return view('backend.pages.Pricing.index');
     }
 
     public function fetchData()
     {
-        $AllData = $this->FeaturesRepository->all();
+        $AllData = $this->PricingRepository->all();
 
         $LocalizationCurrent = LaravelLocalization::getCurrentLocale();
         return response()->json([
@@ -42,8 +42,17 @@ class FeaturesController extends Controller
         $validator = Validator::make($request->all(), [
             'name_ar'=> 'required',
             'name_en'=> 'required',
-            'fontAwesome'=> 'required',
+            'price'=> 'required',
+            'data_ar'=> 'required',
+            'data_en'=> 'required',
+            'currency_ar'=> 'required',
+            'currency_en'=> 'required',
+            'type_ar'=> 'required',
+            'type_en'=> 'required',
+            'description_en'=> 'required',
+            'description_en'=> 'required',
         ]);
+
 
 
         if($validator->fails())
@@ -55,9 +64,13 @@ class FeaturesController extends Controller
 
         }else{
 
-            $this->FeaturesRepository->store([
+            $this->PricingRepository->store([
                 'name'=>['ar'=>$request->name_ar,'en'=>$request->name_en],
-                'fontAwesome'=>$request->fontAwesome,
+                'price'=>$request->price,
+                'data'=>['ar'=>$request->data_ar,'en'=>$request->data_en],
+                'currency'=>['ar'=>$request->currency_ar,'en'=>$request->currency_en],
+                'type'=>['ar'=>$request->type_ar,'en'=>$request->type_en],
+                'description'=>['ar'=>$request->description_ar,'en'=>$request->description_en],
                 'active'=>($request->active?1:0),
                 'created_at'=>Carbon::now(),
             ]);
@@ -75,7 +88,7 @@ class FeaturesController extends Controller
 
     public function edit($id)
     {
-        $dataFind = $this->FeaturesRepository->get($id);
+        $dataFind = $this->PricingRepository->get($id);
 
         if($dataFind)
         {
@@ -99,9 +112,17 @@ class FeaturesController extends Controller
     {
         // dd($request);
         $validator = Validator::make($request->all(), [
-            'name'=> 'required',
-            'fontAwesome'=> 'required',
-
+            'name_ar'=> 'required',
+            'name_en'=> 'required',
+            'price'=> 'required',
+            'data_ar'=> 'required',
+            'data_en'=> 'required',
+            'currency_ar'=> 'required',
+            'currency_en'=> 'required',
+            'type_ar'=> 'required',
+            'type_en'=> 'required',
+            'description_en'=> 'required',
+            'description_en'=> 'required',
         ]);
 
 
@@ -115,10 +136,14 @@ class FeaturesController extends Controller
         }else{
 
 
-            $this->FeaturesRepository->update($id,[
-                'name'=> $request->name,
-                'fontAwesome'=> $request->fontAwesome,
-                'active'=>($request->active_ss?1:0),
+            $this->PricingRepository->update($id,[
+                'name'=>['ar'=>$request->name_ar,'en'=>$request->name_en],
+                'price'=>$request->price,
+                'data'=>['ar'=>$request->data_ar,'en'=>$request->data_en],
+                'currency'=>['ar'=>$request->currency_ar,'en'=>$request->currency_en],
+                'type'=>['ar'=>$request->type_ar,'en'=>$request->type_en],
+                'description'=>['ar'=>$request->description_ar,'en'=>$request->description_en],
+                'active'=>($request->active?1:0),
                 'created_at'=>Carbon::now(),
                ]);
 
@@ -134,7 +159,7 @@ class FeaturesController extends Controller
 
     public function destroy($id)
     {
-        Features::find($id)->delete();
+        Pricing::find($id)->delete();
         return response()->json([
             'status'=>200,
             'message'=>__("backend/validation.delete"),

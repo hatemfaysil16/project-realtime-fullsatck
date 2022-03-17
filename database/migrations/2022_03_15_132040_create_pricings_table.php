@@ -19,7 +19,7 @@ class CreatePricingsTable extends Migration
             $table->string('price');
             $table->string('data');
             $table->string('currency');
-            $table->string('type');
+            $table->string('type')->nullable();
             $table->text('description');
             $table->timestamps();
         });

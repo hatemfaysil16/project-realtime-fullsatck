@@ -3,7 +3,7 @@
 
 
 @section('title')
-features
+pricing
 @endsection
 
 @section('css')
@@ -52,7 +52,7 @@ features
     <!-- end closed -->
 
     {{-- start Add create --}}
-    @include('backend.pages.Features.crud')
+    @include('backend.pages.pricing.crud')
 
 
 
@@ -63,7 +63,7 @@ features
 
 @section('js')
 <script src="{{ asset('backend/assets/js/fslightbox.js') }}"></script>
-<script src="{{ asset('backend/assets/js/crud/Features.js') }}"></script>
+<script src="{{ asset('backend/assets/js/crud/pricing.js') }}"></script>
 
 <script>
 

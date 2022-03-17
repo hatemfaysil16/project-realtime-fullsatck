@@ -3,7 +3,7 @@
 
 
 @section('title')
-features
+map
 @endsection
 
 @section('css')
@@ -34,7 +34,7 @@ features
 
                                 <th>#</th>
                                 <th>{{__('backend/public.name') }}</th>
-                                <th>fontAwesome</th>
+                                <th>iframe</th>
                                 <th>{{__('backend/public.active') }}</th>
                                 <th>{{__('backend/public.operations') }}</th>
                             </tr>
@@ -52,7 +52,7 @@ features
     <!-- end closed -->
 
     {{-- start Add create --}}
-    @include('backend.pages.Features.crud')
+    @include('backend.pages.map.crud')
 
 
 
@@ -63,7 +63,7 @@ features
 
 @section('js')
 <script src="{{ asset('backend/assets/js/fslightbox.js') }}"></script>
-<script src="{{ asset('backend/assets/js/crud/Features.js') }}"></script>
+<script src="{{ asset('backend/assets/js/crud/map.js') }}"></script>
 
 <script>
 

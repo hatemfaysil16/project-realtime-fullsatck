@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
-use App\Models\Features;
-use App\Repository\FeaturesRepository;
+use App\Models\Map;
+use App\Repository\MapRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
-class FeaturesController extends Controller
+class MapController extends Controller
 {
-    // FeaturesRepository
-    protected $FeaturesRepository;
-    public function __construct(FeaturesRepository $FeaturesRepository)
+    // MapRepository
+    protected $MapRepository;
+    public function __construct(MapRepository $MapRepository)
     {
-        $this->FeaturesRepository = $FeaturesRepository;
+        $this->MapRepository = $MapRepository;
     }
 
     public function index()
     {
-        return view('backend.pages.Features.index');
+        return view('backend.pages.map.index');
     }
 
     public function fetchData()
     {
-        $AllData = $this->FeaturesRepository->all();
+        $AllData = $this->MapRepository->all();
 
         $LocalizationCurrent = LaravelLocalization::getCurrentLocale();
         return response()->json([
@@ -42,7 +42,7 @@ class FeaturesController extends Controller
         $validator = Validator::make($request->all(), [
             'name_ar'=> 'required',
             'name_en'=> 'required',
-            'fontAwesome'=> 'required',
+            'iframe'=> 'required',
         ]);
 
 
@@ -55,9 +55,9 @@ class FeaturesController extends Controller
 
         }else{
 
-            $this->FeaturesRepository->store([
+            $this->MapRepository->store([
                 'name'=>['ar'=>$request->name_ar,'en'=>$request->name_en],
-                'fontAwesome'=>$request->fontAwesome,
+                'iframe'=>$request->iframe,
                 'active'=>($request->active?1:0),
                 'created_at'=>Carbon::now(),
             ]);
@@ -75,7 +75,7 @@ class FeaturesController extends Controller
 
     public function edit($id)
     {
-        $dataFind = $this->FeaturesRepository->get($id);
+        $dataFind = $this->MapRepository->get($id);
 
         if($dataFind)
         {
@@ -100,7 +100,7 @@ class FeaturesController extends Controller
         // dd($request);
         $validator = Validator::make($request->all(), [
             'name'=> 'required',
-            'fontAwesome'=> 'required',
+            'iframe'=> 'required',
 
         ]);
 
@@ -115,9 +115,9 @@ class FeaturesController extends Controller
         }else{
 
 
-            $this->FeaturesRepository->update($id,[
+            $this->MapRepository->update($id,[
                 'name'=> $request->name,
-                'fontAwesome'=> $request->fontAwesome,
+                'iframe'=> $request->iframe,
                 'active'=>($request->active_ss?1:0),
                 'created_at'=>Carbon::now(),
                ]);
@@ -134,7 +134,7 @@ class FeaturesController extends Controller
 
     public function destroy($id)
     {
-        Features::find($id)->delete();
+        Map::find($id)->delete();
         return response()->json([
             'status'=>200,
             'message'=>__("backend/validation.delete"),

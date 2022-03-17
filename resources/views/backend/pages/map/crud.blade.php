@@ -24,8 +24,8 @@
 
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">fontAwesome </label>
-                    <input type="text" class="form-control"  id="fontAwesome" name="fontAwesome">
+                    <label for="exampleInputEmail1">iframe </label>
+                    <input type="text" class="form-control"  id="iframe" name="iframe">
                 </div>
 
 
@@ -79,8 +79,8 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="">fontAwesome</label>
-                        <input type="text" id="fontAwesome_s" name="fontAwesome" required class="form-control"/>
+                        <label for="">iframe</label>
+                        <input type="text" id="iframe_s" name="iframe" required class="form-control"/>
                     </div>
 
                 </div>

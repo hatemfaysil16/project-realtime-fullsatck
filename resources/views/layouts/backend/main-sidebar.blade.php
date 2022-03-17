@@ -23,7 +23,9 @@
                     <li> <a href="{{route('services.index')}}">  {{__('backend/services.Add_services') }} </a> </li>
                     <li> <a href="{{route('aboutUs.index')}}">  {{__('backend/aboutUs.Add_aboutUs') }} </a> </li>
                     <li> <a href="{{route('question.index')}}">  {{__('backend/question.question') }} </a> </li>
-
+                    <li> <a href="{{route('features.index')}}">  features </a> </li>
+                    <li> <a href="{{route('map.index')}}">  map </a> </li>
+                    <li> <a href="{{route('ContactUs.index')}}">  ContactUs </a> </li>
 
 
                 </ul>

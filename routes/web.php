@@ -13,8 +13,8 @@ use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\MailController;
 use App\Http\Controllers\backend\QuestionController;
 use App\Http\Controllers\backend\FeaturesController;
-
-
+use App\Http\Controllers\backend\MapController;
+use App\Http\Controllers\backend\ContactUsController;
 
 
 /*
@@ -137,11 +137,32 @@ Route::group(
         });
 
 
+        // map
+        Route::prefix('map')->group(function(){
+            Route::get('/', [MapController::class, 'index'])->name('map.index');
+            Route::get('fetch-Data', [MapController::class, 'fetchData']);
+            Route::get('edit/{id}', [MapController::class, 'edit']);
+            Route::post('store', [MapController::class, 'store']);
+            Route::post('update/{id}', [MapController::class, 'update']);
+            Route::delete('delete/{id}', [MapController::class, 'destroy']);
+        });
+
+        // ContactUs
+        Route::prefix('ContactUs')->group(function(){
+            Route::get('/', [ContactUsController::class, 'index'])->name('ContactUs.index');
+            Route::get('fetch-Data', [ContactUsController::class, 'fetchData']);
+            Route::get('edit/{id}', [ContactUsController::class, 'edit']);
+            Route::post('store', [ContactUsController::class, 'store']);
+            Route::post('update/{id}', [ContactUsController::class, 'update']);
+            Route::delete('delete/{id}', [ContactUsController::class, 'destroy']);
+        });
+
 
 
         //mail
         Route::get('mail', [MailController::class,'index'])->name('mail');
         Route::post('sendMail', [MailController::class,'sendMail'])->name('sendMail');
+
 
 
 

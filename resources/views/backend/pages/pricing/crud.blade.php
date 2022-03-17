@@ -13,6 +13,7 @@
                 <ul class="alert alert-warning d-none" id="save_errorList"></ul>
 
 
+
                 <div class="form-group">
                     <label for="exampleInputEmail1">اسم </label>
                     <input type="text" placeholder="ادخال الاسم باللغة العربيه" class="form-control" id="name_ar" name="name_ar">
@@ -22,11 +23,48 @@
                     <input type="text" class="form-control" placeholder="Enter the name in English" id="name_en" name="name_en">
                 </div>
 
+                <div class="form-group">
+                    <label for="exampleInputEmail1">تاريخ </label>
+                    <input type="text" placeholder="ادخال التاريخ باللغة العربيه" class="form-control" id="data_ar" name="data_ar">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">data </label>
+                    <input type="text" class="form-control" placeholder="Enter the data in English" id="data_en" name="data_en">
+                </div>
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">fontAwesome </label>
-                    <input type="text" class="form-control"  id="fontAwesome" name="fontAwesome">
+                    <label for="exampleInputEmail1">عملة </label>
+                    <input type="text" placeholder="ادخال العملة باللغة العربيه" class="form-control" id="currency_ar" name="currency_ar">
                 </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">currency </label>
+                    <input type="text" class="form-control" placeholder="Enter the currency in English" id="currency_en" name="currency_en">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">نوع  </label>
+                    <input type="text" placeholder="ادخال النوع  باللغة العربيه" class="form-control" id="type_ar" name="type_ar">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">type </label>
+                    <input type="text" class="form-control" placeholder="Enter the type in English" id="type_en" name="type_en">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">مقال  </label>
+                    <input type="text" placeholder="ادخال المقال  باللغة العربيه" class="form-control" id="description_ar" name="description_ar">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">description </label>
+                    <input type="text" class="form-control" placeholder="Enter the description in English" id="description_en" name="description_en">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">price </label>
+                    <input type="text" class="form-control" placeholder="Enter the price in English" id="price_en" name="price_en">
+                </div>
+
+
 
 
                 <div class="row">

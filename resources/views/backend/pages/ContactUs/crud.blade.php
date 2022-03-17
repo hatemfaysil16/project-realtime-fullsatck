@@ -1,58 +1,3 @@
-{{--start add Modal--}}
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-    <form  id="AddEmployeeForm" method="post" enctype="multipart/form-data">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> {{__('backend/category.Add_category') }} </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <ul class="alert alert-warning d-none" id="save_errorList"></ul>
-
-
-                <div class="form-group">
-                    <label for="exampleInputEmail1">اسم </label>
-                    <input type="text" placeholder="ادخال الاسم باللغة العربيه" class="form-control" id="name_ar" name="name_ar">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">name </label>
-                    <input type="text" class="form-control" placeholder="Enter the name in English" id="name_en" name="name_en">
-                </div>
-
-
-                <div class="form-group">
-                    <label for="exampleInputEmail1">fontAwesome </label>
-                    <input type="text" class="form-control"  id="fontAwesome" name="fontAwesome">
-                </div>
-
-
-                <div class="row">
-                    <div class="col-3">
-                        <label>active</label>
-                        <label class="switch">
-                            <input type="checkbox" name="active" >
-                            <span class="slider round"></span>
-                        </label>
-
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="modal-footer">
-
-                <button type="submit" class="btn btn-primary" id="open">{{__('backend/public.save') }} </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('backend/public.close') }}</button>
-            </div>
-        </div>
-    </form>
-    </div>
-</div>
-{{--end add Modal--}}
-
 {{-- start Edit Modal --}}
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -79,9 +24,25 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="">fontAwesome</label>
-                        <input type="text" id="fontAwesome_s" name="fontAwesome" required class="form-control"/>
+                        <label for="">email</label>
+                        <input type="text" id="email_s" name="email" required class="form-control"/>
                     </div>
+
+                    <div class="form-group mb-3">
+                        <label for="">phone</label>
+                        <input type="text" id="phone_s" name="phone" required class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">subject</label>
+                        <textarea placeholder="write subject" class="form-control" id="exampleFormControlTextarea1" rows="15" name="subject"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">message</label>
+                        <textarea placeholder="write message" class="form-control" id="exampleFormControlTextarea1" rows="15" name="message"></textarea>
+                    </div>
+
 
                 </div>
 
