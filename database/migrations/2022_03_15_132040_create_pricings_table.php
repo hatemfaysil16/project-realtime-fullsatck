@@ -21,6 +21,7 @@ class CreatePricingsTable extends Migration
             $table->string('currency');
             $table->string('type')->nullable();
             $table->text('description');
+            $table->boolean('active');
             $table->timestamps();
         });
     }

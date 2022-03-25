@@ -3,7 +3,7 @@
 
 
 @section('title')
-pricing
+    category
 @endsection
 
 @section('css')
@@ -30,14 +30,12 @@ pricing
                         <table id="datatable" class="table table-striped table-bordered p-0 text-center table-hover">
                             <thead>
                             <tr>
+
+
                                 <th>#</th>
                                 <th>{{__('backend/public.name') }}</th>
-                                <th>data</th>
-                                <th>currency</th>
-                                <th>type</th>
-                                <th>description</th>
-                                <th>price</th>
                                 <th>{{__('backend/public.active') }}</th>
+                                <th>{{__('backend/public.image') }}</th>
                                 <th>{{__('backend/public.operations') }}</th>
                             </tr>
                             </thead>
@@ -54,7 +52,7 @@ pricing
     <!-- end closed -->
 
     {{-- start Add create --}}
-    @include('backend.pages.pricing.crud')
+    @include('backend.pages.Logo.crud')
 
 
 
@@ -65,7 +63,7 @@ pricing
 
 @section('js')
 <script src="{{ asset('backend/assets/js/fslightbox.js') }}"></script>
-<script src="{{ asset('backend/assets/js/crud/pricing.js') }}"></script>
+<script src="{{ asset('backend/assets/js/crud/Logo.js') }}"></script>
 
 <script>
 

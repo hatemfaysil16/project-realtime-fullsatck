@@ -33,7 +33,7 @@ $(document).ready(function() {
     function fetchData() {
         $.ajax({
             type: "GET",
-            url: "/admin/category/fetch-Data",
+            url: "/admin/logo/fetch-Data",
             dataType: "json",
             success: function(response) {
                 $('tbody').html("");
@@ -75,7 +75,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            url: "category/store",
+            url: "logo/store",
             data: fotmData,
             contentType: false,
             processData: false,
@@ -114,7 +114,7 @@ $(document).ready(function() {
         $('#editModal').modal('show');
         $.ajax({
             type: "GET",
-            url: "category/edit/" + stud_id,
+            url: "logo/edit/" + stud_id,
             success: function(response) {
                 if (response.status == 404) {
                     $('#success_message').addClass('alert alert-success');
@@ -164,7 +164,7 @@ $(document).ready(function() {
         $.ajax({
             type: "post",
 
-            url: "category/update/" + id,
+            url: "logo/update/" + id,
             data: EditFormData,
             dataType: "json",
             contentType: false,
@@ -213,7 +213,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "DELETE",
-            url: "category/delete/" + id,
+            url: "logo/delete/" + id,
             dataType: "json",
             success: function(response) {
                 if (response.status == 404) {

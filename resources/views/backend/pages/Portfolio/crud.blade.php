@@ -6,12 +6,11 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"> {{__('backend/category.Add_category') }} </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>   
+                <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <ul class="alert alert-warning d-none" id="save_errorList"></ul>
-
 
 
                 <div class="form-group">
@@ -24,48 +23,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">تاريخ </label>
-                    <input type="text" placeholder="ادخال التاريخ باللغة العربيه" class="form-control" id="data_ar" name="data_ar">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">data </label>
-                    <input type="text" class="form-control" placeholder="Enter the data in English" id="data_en" name="data_en">
+                    <label for="exampleFormControlTextarea1">image</label>
+                    <input type="file" class="form-control" id="image" name="image">
                 </div>
 
-                <div class="form-group">
-                    <label for="exampleInputEmail1">عملة </label>
-                    <input type="text" placeholder="ادخال العملة باللغة العربيه" class="form-control" id="currency_ar" name="currency_ar">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">currency </label>
-                    <input type="text" class="form-control" placeholder="Enter the currency in English" id="currency_en" name="currency_en">
-                </div>
-
-                <div class="form-group">
-                    <label for="exampleInputEmail1">نوع  </label>
-                    <input type="text" placeholder="ادخال النوع  باللغة العربيه" class="form-control" id="type_ar" name="type_ar">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">type </label>
-                    <input type="text" class="form-control" placeholder="Enter the type in English" id="type_en" name="type_en">
-                </div>
-
-                <div class="form-group">
-                    <label for="exampleInputEmail1">مقال  </label>
-                    <input type="text" placeholder="ادخال المقال  باللغة العربيه" class="form-control" id="description_ar" name="description_ar">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">description </label>
-                    <input type="text" class="form-control" placeholder="Enter the description in English" id="description_en" name="description_en">
-                </div>
-
-                <div class="form-group">
-                    <label for="exampleInputEmail1">price </label>
-                    <input type="text" class="form-control" placeholder="Enter the price in English" id="price" name="price">
-                </div>
-
-
-
+                <img src="" style="width:50%" id="mainThmb" alt="">
 
                 <div class="row">
                     <div class="col-3">
@@ -111,41 +73,17 @@
 
                     <input type="hidden" id="stud_id" name="id"/>
 
+                    <div class="form-group mb-3">
+                        <label for="">{{__('backend/public.Name_field') }}</label>
+                        <input type="text" id="name_s" name="name" required class="form-control"/>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="">{{__('backend/public.image') }}</label>
+                        <input type="hidden" id="old_image" name="old_image">
+                        <input type="file" id="" name="image" class="form-control">
+                        <img src="" style="width: 40%" id="image_s" name="image" alt=""/>
 
-                <div class="form-group">
-                    <label for="exampleInputEmail1">name </label>
-                    <input type="text" class="form-control" placeholder="Enter the name " id="name_s" name="name">
-                </div>
-
-
-                <div class="form-group">
-                    <label for="exampleInputEmail1">data </label>
-                    <input type="text" class="form-control" placeholder="Enter the data" id="data_s" name="data">
-                </div>
-
-
-                <div class="form-group">
-                    <label for="exampleInputEmail1">currency </label>
-                    <input type="text" class="form-control" placeholder="Enter the currency" id="currency_s" name="currency">
-                </div>
-
-
-                <div class="form-group">
-                    <label for="exampleInputEmail1">type </label>
-                    <input type="text" class="form-control" placeholder="Enter the type" id="type_s" name="type">
-                </div>
-
-
-                <div class="form-group">
-                    <label for="exampleInputEmail1">description </label>
-                    <input type="text" class="form-control" placeholder="Enter the description " id="description_s" name="description">
-                </div>
-
-                <div class="form-group">
-                    <label for="exampleInputEmail1">price </label>
-                    <input type="text" class="form-control" placeholder="Enter the price " id="price_s" name="price">
-                </div>
-
+                    </div>
                 </div>
 
                 <div class="row">

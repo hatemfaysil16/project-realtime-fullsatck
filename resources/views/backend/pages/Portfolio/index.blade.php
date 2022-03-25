@@ -54,7 +54,7 @@ pricing
     <!-- end closed -->
 
     {{-- start Add create --}}
-    @include('backend.pages.pricing.crud')
+    @include('backend.pages.Portfolio.crud')
 
 
 
@@ -65,7 +65,7 @@ pricing
 
 @section('js')
 <script src="{{ asset('backend/assets/js/fslightbox.js') }}"></script>
-<script src="{{ asset('backend/assets/js/crud/pricing.js') }}"></script>
+<script src="{{ asset('backend/assets/js/crud/Portfolio.js') }}"></script>
 
 <script>
 

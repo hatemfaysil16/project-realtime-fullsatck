@@ -15,6 +15,9 @@ use App\Http\Controllers\backend\QuestionController;
 use App\Http\Controllers\backend\FeaturesController;
 use App\Http\Controllers\backend\MapController;
 use App\Http\Controllers\backend\ContactUsController;
+use App\Http\Controllers\backend\PricingController;
+use App\Http\Controllers\backend\LogoController;
+use App\Http\Controllers\backend\portfolioController;
 
 
 /*
@@ -157,8 +160,44 @@ Route::group(
             Route::delete('delete/{id}', [ContactUsController::class, 'destroy']);
         });
 
+        // price
+        Route::prefix('price')->group(function(){
+            Route::get('/', [PricingController::class, 'index'])->name('price.index');
+            Route::get('fetch-Data', [PricingController::class, 'fetchData']);
+            Route::get('edit/{id}', [PricingController::class, 'edit']);
+            Route::post('store', [PricingController::class, 'store']);
+            Route::post('update/{id}', [PricingController::class, 'update']);
+            Route::delete('delete/{id}', [PricingController::class, 'destroy']);
+        });
+
+        // logo
+        Route::prefix('logo')->group(function(){
+            Route::get('/', [LogoController::class, 'index'])->name('logo.index');
+            Route::get('fetch-Data', [LogoController::class, 'fetchData']);
+            Route::get('edit/{id}', [LogoController::class, 'edit']);
+            Route::post('store', [LogoController::class, 'store']);
+            Route::post('update/{id}', [LogoController::class, 'update']);
+            Route::delete('delete/{id}', [LogoController::class, 'destroy']);
+        });
 
 
+        // portfolio
+        Route::prefix('portfolio')->group(function(){
+            Route::get('/', [portfolioController::class, 'index'])->name('portfolio.index');
+            Route::get('fetch-Data', [portfolioController::class, 'fetchData']);
+            Route::get('edit/{id}', [portfolioController::class, 'edit']);
+            Route::post('store', [portfolioController::class, 'store']);
+            Route::post('update/{id}', [portfolioController::class, 'update']);
+            Route::delete('delete/{id}', [portfolioController::class, 'destroy']);
+        });
+
+        Route::get('fetchData',[portfolioController::class,'fetchData']);
+        Route::get('/multi/image',[portfolioController::class,'MultPic'])->name('multi.image');
+        Route::post('/multi/add',[portfolioController::class,'storeImg'])->name('store.image');
+        Route::get('/multi/delete/{id}',[portfolioController::class,'deleteMulti'])->name('delete.multi');
+        
+        
+        
         //mail
         Route::get('mail', [MailController::class,'index'])->name('mail');
         Route::post('sendMail', [MailController::class,'sendMail'])->name('sendMail');

@@ -18,7 +18,7 @@ $(document).ready(function() {
     function fetchData() {
         $.ajax({
             type: "GET",
-            url: "/admin/features/fetch-Data",
+            url: "/admin/price/fetch-Data",
             dataType: "json",
             success: function(response) {
                 $('tbody').html("");
@@ -32,10 +32,33 @@ $(document).ready(function() {
                         var name = item.name.ar;
                     }
 
+                    if (response.LocalizationCurrent == 'en') {
+                        var data = item.data.en;
+                    } else if (response.LocalizationCurrent == 'ar') {
+                        var data = item.data.ar;
+                    }
+
+                    if (response.LocalizationCurrent == 'en') {
+                        var currency = item.currency.en;
+                    } else if (response.LocalizationCurrent == 'ar') {
+                        var currency = item.currency.ar;
+                    }
 
 
+                    if (response.LocalizationCurrent == 'en') {
+                        var type = item.type.en;
+                    } else if (response.LocalizationCurrent == 'ar') {
+                        var type = item.type.ar;
+                    }
 
-                    if (item.active ==1) {
+
+                    if (response.LocalizationCurrent == 'en') {
+                        var description = item.description.en;
+                    } else if (response.LocalizationCurrent == 'ar') {
+                        var description = item.description.ar;
+                    }
+
+                    if (item.active == 1) {
                         var active = 'active';
                     } else if (item.active == 0) {
                         var active = 'not active';
@@ -44,9 +67,13 @@ $(document).ready(function() {
 
                     $('tbody').append('<tr>\
                         <td>' + (key + 1) + '</td>\
-                        <td>'+name+'</td>\
-                        <td>'+item.fontAwesome+'</td>\
-                        <td><span class="badge badge-success badge-pill">'+active+'</span></td>\
+                        <td>' + name + '</td>\
+                        <td>' + data + '</td>\
+                        <td>' + currency + '</td>\
+                        <td>' + type + '</td>\
+                        <td>' + description + '</td>\
+                        <td>' + item.price + '</td>\
+                        <td><span class="badge badge-success badge-pill">' + active + '</span></td>\
                         <td><button type="button" value="' + item.id + '" class="btn btn-primary editbtn btn-sm">Edit</button>\
                         <button type="button" value="' + item.id + '" class="btn btn-danger delete_btn btn-sm">Delete</button>\
                     \</tr>');
@@ -64,7 +91,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            url: "features/store",
+            url: "price/store",
             data: fotmData,
             contentType: false,
             processData: false,
@@ -103,7 +130,7 @@ $(document).ready(function() {
         $('#editModal').modal('show');
         $.ajax({
             type: "GET",
-            url: "features/edit/" + stud_id,
+            url: "price/edit/" + stud_id,
             success: function(response) {
                 if (response.status == 404) {
 
@@ -121,18 +148,46 @@ $(document).ready(function() {
                         var name = response.dataFind.name.ar;
                     }
 
+                    if (response.LocalizationCurrent == 'en') {
+                        var data = response.dataFind.data.en;
+                    } else if (response.LocalizationCurrent == 'ar') {
+                        var data = response.dataFind.data.ar;
+                    }
 
+                    if (response.LocalizationCurrent == 'en') {
+                        var currency = response.dataFind.currency.en;
+                    } else if (response.LocalizationCurrent == 'ar') {
+                        var currency = response.dataFind.currency.ar;
+                    }
+
+
+                    if (response.LocalizationCurrent == 'en') {
+                        var type = response.dataFind.type.en;
+                    } else if (response.LocalizationCurrent == 'ar') {
+                        var type = response.dataFind.type.ar;
+                    }
+
+
+                    if (response.LocalizationCurrent == 'en') {
+                        var description = response.dataFind.description.en;
+                    } else if (response.LocalizationCurrent == 'ar') {
+                        var description = response.dataFind.description.ar;
+                    }
 
 
                     $('#name_s').val(name);
-                    $('#fontAwesome_s').val(response.dataFind.fontAwesome);
-
+                    $('#data_s').val(data);
+                    $('#currency_s').val(currency);
+                    $('#type_s').val(type);
+                    $('#description_s').val(description);
+                    $('#name_s').val(name);
+                    $('#price_s').val(response.dataFind.price);
                     $('#active_s').val(response.dataFind.active);
 
 
-                    if($('#active_s').val()==true){
-                        $('#active_s').attr('checked',"1");
-                    }else if($('#active_s').val()==0){
+                    if ($('#active_s').val() == true) {
+                        $('#active_s').attr('checked', "1");
+                    } else if ($('#active_s').val() == 0) {
                         $('#active_s').removeAttr('checked');
                     }
 
@@ -155,7 +210,7 @@ $(document).ready(function() {
         $.ajax({
             type: "post",
 
-            url: "features/update/" + id,
+            url: "price/update/" + id,
             data: EditFormData,
             dataType: "json",
             contentType: false,
@@ -204,7 +259,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "DELETE",
-            url: "features/delete/" + id,
+            url: "price/delete/" + id,
             dataType: "json",
             success: function(response) {
                 if (response.status == 404) {

@@ -26,6 +26,9 @@
                     <li> <a href="{{route('features.index')}}">  features </a> </li>
                     <li> <a href="{{route('map.index')}}">  map </a> </li>
                     <li> <a href="{{route('ContactUs.index')}}">  ContactUs </a> </li>
+                    <li> <a href="{{route('price.index')}}">  price </a> </li>
+                    <li> <a href="{{route('logo.index')}}">  logo </a> </li>
+                    <li> <a href="{{route('multi.image')}}">  protifilo </a> </li>
 
 
                 </ul>

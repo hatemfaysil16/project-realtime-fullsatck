@@ -2,33 +2,33 @@
 
 namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
-use App\Models\Categories;
-use App\Repository\CategoryRepository;
+use App\Models\Logo;
+use App\Repository\LogoRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Image;
 use Carbon\Carbon;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-class CategoriesController extends Controller
+class LogoController extends Controller
 {
-    // CategoryRepository
-    protected $RepositoryCategory;
-    public function __construct(CategoryRepository $RepositoryCategory)
+    // LogoRepository
+    protected $LogoRepository;
+    public function __construct(LogoRepository $LogoRepository)
     {
-        $this->RepositoryCategory = $RepositoryCategory;
+        $this->LogoRepository = $LogoRepository;
     }
 
     public function index()
     {
-        return view('backend.pages.Categories.index');
+        return view('backend.pages.Logo.index');
     }
 
     public function fetchData()
     {
-        $AllData = $this->RepositoryCategory->all();
+        $AllData = $this->LogoRepository->all();
 
-        $ConstImage =Categories::IMAGE_PATH;
+        $ConstImage =Logo::IMAGE_PATH;
         $url = env('APP_URL');
         $LocalizationCurrent = LaravelLocalization::getCurrentLocale();
         return response()->json([
@@ -62,11 +62,11 @@ class CategoriesController extends Controller
             {
                 $image = $request->file('image');
                 $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-                Image::make($image)->resize(300,300)->Save(public_path(Categories::IMAGE_PATH.$name_gen));
+                Image::make($image)->resize(300,300)->Save(public_path(Logo::IMAGE_PATH.$name_gen));
                 $save_url = $name_gen;
             }
 
-            $this->RepositoryCategory->store([
+            $this->LogoRepository->store([
                 'name'=>['ar'=>$request->name_ar,'en'=>$request->name_en],
                 'image'=>$save_url,
                 'active'=>($request->active?1:0),
@@ -79,16 +79,16 @@ class CategoriesController extends Controller
             ]);
         }
 
-        // success add data Categories
+        // success add data Logo
     }
 
     public function edit($id)
     {
-        $dataFind = $this->RepositoryCategory->get($id);
+        $dataFind = $this->LogoRepository->get($id);
 
         if($dataFind)
         {
-            $ConstImage =Categories::IMAGE_PATH;
+            $ConstImage =Logo::IMAGE_PATH;
             $url = env('APP_URL');
             $LocalizationCurrent = LaravelLocalization::getCurrentLocale();
             return response()->json([
@@ -135,15 +135,15 @@ class CategoriesController extends Controller
             if ($brand_image) {
                 $image = $request->file('image');
                 $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-                Image::make($image)->resize(300, 300)->Save(public_path(Categories::IMAGE_PATH.$name_gen));
+                Image::make($image)->resize(300, 300)->Save(public_path(Logo::IMAGE_PATH.$name_gen));
                 $save_url = $name_gen;
 
 
-                if (file_exists(public_path(Categories::IMAGE_PATH.$request->old_image))) {
-                    unlink(public_path(Categories::IMAGE_PATH.$request->old_image));
+                if (file_exists(public_path(Logo::IMAGE_PATH.$request->old_image))) {
+                    unlink(public_path(Logo::IMAGE_PATH.$request->old_image));
                 }
 
-                $this->RepositoryCategory->update($id,[
+                $this->LogoRepository->update($id,[
                     'name'=> $request->name,
                     'image'=>$save_url,
                     'created_at'=>Carbon::now(),
@@ -157,7 +157,7 @@ class CategoriesController extends Controller
 
             }else{
 
-                $this->RepositoryCategory->update($id,[
+                $this->LogoRepository->update($id,[
                     'name'=> $request->name,
                     'image'=>$old_image,
                     'active'=>($request->active_ss?1:0),
@@ -180,12 +180,12 @@ class CategoriesController extends Controller
 
     public function destroy($id)
     {
-            $delete = Categories::find($id);
+            $delete = Logo::find($id);
             if($delete)
             {
                 $old_image = $delete->image;
-                if (file_exists(public_path(Categories::IMAGE_PATH.$old_image))) {
-                    unlink(public_path(Categories::IMAGE_PATH.$old_image));
+                if (file_exists(public_path(Logo::IMAGE_PATH.$old_image))) {
+                    unlink(public_path(Logo::IMAGE_PATH.$old_image));
                 }
                 $delete->delete();
                 return response()->json([

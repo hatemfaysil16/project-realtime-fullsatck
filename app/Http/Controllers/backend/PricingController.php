@@ -21,7 +21,7 @@ class PricingController extends Controller
 
     public function index()
     {
-        return view('backend.pages.Pricing.index');
+        return view('backend.pages.pricing.index');
     }
 
     public function fetchData()
@@ -39,6 +39,7 @@ class PricingController extends Controller
 
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'name_ar'=> 'required',
             'name_en'=> 'required',
@@ -110,19 +111,13 @@ class PricingController extends Controller
 
     public function update(Request $request,$id)
     {
-        // dd($request);
         $validator = Validator::make($request->all(), [
-            'name_ar'=> 'required',
-            'name_en'=> 'required',
+            'name'=> 'required',
             'price'=> 'required',
-            'data_ar'=> 'required',
-            'data_en'=> 'required',
-            'currency_ar'=> 'required',
-            'currency_en'=> 'required',
-            'type_ar'=> 'required',
-            'type_en'=> 'required',
-            'description_en'=> 'required',
-            'description_en'=> 'required',
+            'data'=> 'required',
+            'currency'=> 'required',
+            'type'=> 'required',
+            'description'=> 'required',
         ]);
 
 
@@ -137,12 +132,12 @@ class PricingController extends Controller
 
 
             $this->PricingRepository->update($id,[
-                'name'=>['ar'=>$request->name_ar,'en'=>$request->name_en],
+                'name'=>$request->name,
                 'price'=>$request->price,
-                'data'=>['ar'=>$request->data_ar,'en'=>$request->data_en],
-                'currency'=>['ar'=>$request->currency_ar,'en'=>$request->currency_en],
-                'type'=>['ar'=>$request->type_ar,'en'=>$request->type_en],
-                'description'=>['ar'=>$request->description_ar,'en'=>$request->description_en],
+                'data'=>$request->data,
+                'currency'=>$request->currency,
+                'type'=>$request->type,
+                'description'=>$request->description,
                 'active'=>($request->active?1:0),
                 'created_at'=>Carbon::now(),
                ]);
