@@ -15,13 +15,14 @@ class CreateSocialVideosTable extends Migration
     {
         Schema::create('social_videos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('video');
-            $table->string('youtube');
-            $table->string('image');
+            $table->text('title');
             $table->text('description');
-            $table->boolean('active');
-
+            $table->text('body')->nullable();
+            $table->string('image')->nullable();
+            $table->string('youtube')->nullable();
+            $table->string('video')->nullable();
+            $table->boolean('in_home')->default(false);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

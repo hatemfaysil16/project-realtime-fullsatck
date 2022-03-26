@@ -50,7 +50,7 @@ class ServicesController extends Controller
             'name_en'=> 'required',
             'description_ar'=> 'required',
             'description_en'=> 'required',
-            'image'=> 'required|mimes:pdf,jpeg,png,jpg',
+            'image'=> 'required',
         ]);
 
 

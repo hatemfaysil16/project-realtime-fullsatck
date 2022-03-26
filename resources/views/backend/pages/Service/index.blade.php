@@ -34,6 +34,7 @@ slider
 
                                 <th>#</th>
                                 <th>{{__('backend/public.name') }}</th>
+                                <th>describtion </th>
                                 <th>{{__('backend/public.active') }}</th>
                                 <th>{{__('backend/public.image') }}</th>
                                 <th>{{__('backend/public.operations') }}</th>

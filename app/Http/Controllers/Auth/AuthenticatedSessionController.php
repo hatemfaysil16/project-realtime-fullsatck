@@ -18,7 +18,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function showlogin()
     {
-        return view('auth.login');
+        return redirect()->route('login.admin');
     }
 
     /**

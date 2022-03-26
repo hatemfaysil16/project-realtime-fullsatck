@@ -20,7 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function showregister()
     {
-        return view('auth.register');
+        return redirect()->route('login.admin');
     }
 
     /**

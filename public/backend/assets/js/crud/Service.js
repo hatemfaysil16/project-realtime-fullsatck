@@ -18,13 +18,12 @@ $(document).ready(function() {
     function fetchData() {
         $.ajax({
             type: "GET",
-            url: "/admin/aboutUs/fetch-Data",
+            url: "/admin/services/fetch-Data",
             dataType: "json",
             success: function(response) {
                 $('tbody').html("");
 
                 $.each(response.AllData, function(key, item) {
-
                     if (response.LocalizationCurrent == 'en') {
                         var name = item.name.en;
                     } else if (response.LocalizationCurrent == 'ar') {
@@ -36,13 +35,16 @@ $(document).ready(function() {
                     } else if (response.LocalizationCurrent == 'ar') {
                         var description = item.description.ar;
                     }
+                    console.log(response.LocalizationCurrent);
 
-                    if (response.LocalizationCurrent == 'en') {
-                        var fullDescription = item.fullDescription.en;
-                    } else if (response.LocalizationCurrent == 'ar') {
-                        var fullDescription = item.fullDescription.ar;
-                    }
 
+                    // if (response.LocalizationCurrent == 'en') {
+                    //     var fullDescription = item.fullDescription.en;
+                    // } else if (response.LocalizationCurrent == 'ar') {
+                    //     var fullDescription = item.fullDescription.ar;
+                    // }
+
+                    console.log('sd');
 
                     if (item.active ==1) {
                         var active = 'active';
@@ -50,12 +52,13 @@ $(document).ready(function() {
                         var active = 'not active';
                     }
 
+
                     $('tbody').append('<tr>\
                         <td>' + (key + 1) + '</td>\
                         <td>' + name + '</td>\
                         <td>'+description+'</td>\
-                        <td>'+fullDescription+'</td>\
                         <td><span class="badge badge-success badge-pill">'+active+'</span></td>\
+                        <td><a  data-fslightbox="gallery" href="' + response.url + response.ConstImage + item.image + '"><img  class="container" style="width: 10rem;" src="' + response.url + response.ConstImage + item.image + '" alt=""></a></td>\
                         <td><button type="button" value="' + item.id + '" class="btn btn-primary editbtn btn-sm">Edit</button>\
                         <button type="button" value="' + item.id + '" class="btn btn-danger delete_btn btn-sm">Delete</button>\
                     \</tr>');
@@ -73,12 +76,13 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            url: "aboutUs/store",
+            url: "services/store",
             data: fotmData,
             contentType: false,
             processData: false,
             dataType: "json",
             success: function(response) {
+                console.log(response);
 
                 if (response.status == 400) {
                     $('#save_errorList').html("");
@@ -112,7 +116,7 @@ $(document).ready(function() {
         $('#editModal').modal('show');
         $.ajax({
             type: "GET",
-            url: "aboutUs/edit/" + stud_id,
+            url: "services/edit/" + stud_id,
             success: function(response) {
                 // console.log(response);
                 if (response.status == 404) {
@@ -135,11 +139,6 @@ $(document).ready(function() {
                     }
 
 
-                    if (response.LocalizationCurrent == 'en') {
-                        var fullDescription = response.dataFind.fullDescription.en;
-                    } else if (response.LocalizationCurrent == 'ar') {
-                        var fullDescription = response.dataFind.fullDescription.ar;
-                    }
 
 
                     $('#name_s').val(name);
@@ -177,7 +176,7 @@ $(document).ready(function() {
         $.ajax({
             type: "post",
 
-            url: "aboutUs/update/" + id,
+            url: "services/update/" + id,
             data: EditFormData,
             dataType: "json",
             contentType: false,
@@ -227,7 +226,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "DELETE",
-            url: "aboutUs/delete/" + id,
+            url: "services/delete/" + id,
             dataType: "json",
             success: function(response) {
                 if (response.status == 404) {

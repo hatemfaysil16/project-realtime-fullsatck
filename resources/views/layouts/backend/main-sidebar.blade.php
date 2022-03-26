@@ -29,8 +29,9 @@
                     <li> <a href="{{route('price.index')}}">  price </a> </li>
                     <li> <a href="{{route('logo.index')}}">  logo </a> </li>
                     <li> <a href="{{route('multi.image')}}">  protifilo </a> </li>
+                    <li> <a href="{{route('Media_center.index')}}">  Media_center </a> </li>
 
-
+                    
                 </ul>
             </li>
 

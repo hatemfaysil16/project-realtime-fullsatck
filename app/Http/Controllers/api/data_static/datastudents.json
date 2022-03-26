@@ -1,0 +1,14 @@
+{
+    "data": [{
+            "id": 1,
+            "name": "students_one",
+            "image": "http://127.0.0.1:8000/upload/backend/static/students/1641112355.jpg"
+        },
+        {
+            "id": 2,
+            "name": "students_two",
+            "image": "http://127.0.0.1:8000/upload/backend/static/students/1641114348.jpg"
+        }
+    ]
+
+}

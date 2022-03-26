@@ -18,6 +18,7 @@ use App\Http\Controllers\backend\ContactUsController;
 use App\Http\Controllers\backend\PricingController;
 use App\Http\Controllers\backend\LogoController;
 use App\Http\Controllers\backend\portfolioController;
+use App\Http\Controllers\backend\MediaCenterController;
 
 
 /*
@@ -47,6 +48,7 @@ Route::group(
         Route::get('/', function () {
             return redirect()->route('login.admin');
         });
+
 
 
 
@@ -203,6 +205,8 @@ Route::group(
         Route::post('sendMail', [MailController::class,'sendMail'])->name('sendMail');
 
 
+        Route::resource('Media_center', MediaCenterController::class)->except(['show']);
+
 
 
 
@@ -211,7 +215,7 @@ Route::group(
 
 
 
-        require __DIR__.'/auth.php';
+    require __DIR__.'/auth.php';
 
 
 
